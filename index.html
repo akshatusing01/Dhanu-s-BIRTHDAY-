@@ -143,24 +143,77 @@
             </footer>
         </div>
     </section>
-    <section id="screen-4" class="site-screen hidden scrollable">
-        <div class="vault-wrapper">
+        <section id="screen-4" class="site-screen hidden scrollable">
+        <div class="vault-container">
             <header class="vault-header">
-                <span class="vault-badge">✨🦊🐷🦖✨</span>
-                <h2>The Inside Joke & Nickname Scrapbook</h2>
-                <p>Tap any polaroid block to unlock the memory or phrase behind it.</p>
+                <span class="vault-icon">🐷</span>
+                <h2>The Custom Archive</h2>
+                <p>Click any polaroid to unseal a core memory or inside joke...</p>
             </header>
 
-            <div class="scrapbook-grid">
-                
-                <div class="polaroid-card" onclick="triggerVaultAlert('📍 30/07/2025: The legendary Karond geographic roasting loop that started our entire playful banter dynamic!')">
-                    <div class="polaroid-img-placeholder">🌍</div>
-                    <p class="polaroid-caption">Karondd!! 📍</p>
+            <div class="polaroid-grid">
+                <div class="polaroid-card" onclick="revealMemory('poori')">
+                    <div class="polaroid-frame">
+                        <div class="photo-placeholder">🫓</div>
+                        <p class="polaroid-label">Poori Misra</p>
+                    </div>
                 </div>
 
-                <div class="polaroid-card" onclick="triggerVaultAlert('🫓 08/08/2025: &ldquo;Ok. Poori Misra 🫓&rdquo; — The very first custom spin on your name when the walls started coming down.')">
-                    <div class="polaroid-img-placeholder">🫓</div>
-                    <p class="polaroid-caption">Poori Misra 🫓</p>
+                <div class="polaroid-card" onclick="revealMemory('pookie')">
+                    <div class="polaroid-frame">
+                        <div class="photo-placeholder">🎀🐥</div>
+                        <p class="polaroid-label">Pookie Pookie</p>
+                    </div>
                 </div>
 
-                <div class="polaroid-card
+                <div class="polaroid-card" onclick="revealMemory('piggy')">
+                    <div class="polaroid-frame">
+                        <div class="photo-placeholder">🐷</div>
+                        <p class="polaroid-label">Piggy / Piggo</p>
+                    </div>
+                </div>
+
+                <div class="polaroid-card" onclick="revealMemory('dino')">
+                    <div class="polaroid-frame">
+                        <div class="photo-placeholder">🦖</div>
+                        <p class="polaroid-label">Dinasour Rex</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="memory-popup" class="hidden-popup" onclick="closeMemory()">
+                <div class="popup-content">
+                    <h4 id="popup-title">Memory Title</h4>
+                    <p id="popup-desc">Memory Details</p>
+                    <span class="close-hint">Tap anywhere to close</span>
+                </div>
+            </div>
+
+            <div class="reasons-block glass-card">
+                <h3>Reasons You Are Indispensable 💖</h3>
+                <p class="reason-instruction">Click the button below to generate a real reason why you are cherished.</p>
+                <div class="reason-display-box">
+                    <p id="current-reason">"Click below to unlock Reason #1..."</p>
+                </div>
+                <button id="next-reason-btn" class="inline-btn">Generate Another Reason ✨</button>
+            </div>
+
+            <div class="vault-footer">
+                <button id="proceed-to-game" class="main-btn">Enter The Memory Hunt Game 🎮</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="screen-6" class="site-screen hidden">
+        <div class="game-container">
+            <header class="game-header">
+                <h2>Heart Collector Minigame ❤️</h2>
+                <p>Poorvi, 5 glowing hearts are hidden floating around this screen! Tap all 5 to unseal the final birthday preparation deck!</p>
+                <div class="score-board">Hearts Collected: <span id="score-counter">0</span> / 5</div>
+            </header>
+
+            <div id="game-boundary"></div>
+
+            <button id="proceed-to-cake" class="main-btn hidden-btn">Next: Unseal Virtual Cake 🎂</button>
+        </div>
+    </section>
