@@ -1,274 +1,136 @@
-// --- 1. Interactive Starfield Canvas Engine ---
+// Starfield Background
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
-
 let stars = [];
-const numStars = 120;
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+window.addEventListener('resize', resize); resize();
+for(let i=0; i<60; i++) { stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5, d: Math.random()*0.02+0.01 }); }
+function drawStars() {
+    ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle = "white";
+    stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill(); s.y -= s.d; if(s.y < 0) s.y = canvas.height; });
+    requestAnimationFrame(drawStars);
 }
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+drawStars();
 
-// Initializing star coordinates & speed metrics
-for (let i = 0; i < numStars; i++) {
-    stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5,
-        velocity: Math.random() * 0.05 + 0.02,
-        alpha: Math.random(),
-        twinkleSpeed: Math.random() * 0.02 + 0.01
-    });
+// Countdown setup
+const target = new Date('August 13, 2026 00:00:00').getTime();
+function runCountdown() {
+    const delta = target - new Date().getTime();
+    const d = Math.floor(delta / (1000*60*60*24));
+    const h = Math.floor((delta % (1000*60*60*24)) / (1000*60*60));
+    const m = Math.floor((delta % (1000*60*60)) / (1000*60));
+    const s = Math.floor((delta % (1000*60)) / 1000);
+    document.getElementById('days').innerText = d;
+    document.getElementById('hours').innerText = h;
+    document.getElementById('minutes').innerText = m;
+    document.getElementById('seconds').innerText = s;
 }
+setInterval(runCountdown, 1000); runCountdown();
 
-function animateStars() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    for (let i = 0; i < numStars; i++) {
-        let s = stars[i];
+// Screen Routing Engine (Fades previous screens completely)
+function switchScreen(currentId, nextId, callback) {
+    gsap.to(currentId, { opacity: 0, duration: 0.4, onComplete: () => {
+        const curr = document.querySelector(currentId);
+        curr.classList.add('hidden');
+        curr.classList.remove('active');
         
-        // Twinkle factor update
-        s.alpha += s.twinkleSpeed;
-        if (s.alpha > 1 || s.alpha < 0.1) {
-            s.twinkleSpeed = -s.twinkleSpeed;
-        }
-        
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.radius, 0, Math.random() * Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
-        ctx.fill();
-        
-        // Soft drifting upward movement
-        s.y -= s.velocity;
-        if (s.y < 0) {
-            s.y = canvas.height;
-            s.x = Math.random() * canvas.width;
-        }
-    }
-    requestAnimationFrame(animateStars);
+        const next = document.querySelector(nextId);
+        next.classList.remove('hidden');
+        next.classList.add('active');
+        gsap.fromTo(nextId, { opacity: 0 }, { opacity: 1, duration: 0.5, onComplete: callback });
+    }});
 }
-animateStars();
 
-
-// --- 2. Live Precision Countdown Engine ---
-// Target Milestone: Poorvi's Birthday - August 13, 2026
-const targetDate = new Date('August 13, 2026 00:00:00').getTime();
-
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    // Time calculations for days, hours, minutes and seconds
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // Injecting values with zero-padded string safety
-    document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-    document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-    document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-    document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-
-    // Handle countdown completion edge case
-    if (distance < 0) {
-        clearInterval(countdownInterval);
-        document.querySelector('.countdown-headline').innerText = "The Wait Is Over! ✨";
-        document.getElementById('countdown').innerHTML = "<div class='time-box'><span style='font-size:2rem; width:100%; font-family:var(--font-romantic)'>Happy Birthday Poorvi! ❤️</span></div>";
-    }
-}
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown();
-
-
-// --- 3. Interactive Audio & Transition Initialization ---
-const openBtn = document.getElementById('open-gift-btn');
-const audio = document.getElementById('bg-music');
-
-openBtn.addEventListener('click', () => {
-    // Attempting to trigger background music to bypass standard browser auto-play blockers
-    audio.play().then(() => {
-        console.log("Audio pipeline initialized successfully.");
-    }).catch(error => {
-        console.log("Audio playback blocked or file missing: ", error);
-    });
-
-    // Alert transition feedback hook
-    alert("✨ Phase 1 Successful! The musical timeline is connected. Let's start coding Phase 2 to reveal your WhatsApp Story Timeline!");
-});
-// Locate your existing proceedBtn event block at the bottom and replace it with this:
-proceedBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Stops the envelope overlay from resetting unexpectedly
-    
-    // Transition Screen 2 to Screen 3 smoothly using GSAP
-    gsap.to("#screen-2", {
-        opacity: 0,
-        y: -30,
-        duration: 0.5,
-        onComplete: () => {
-            screen2.classList.add('hidden');
-            
-            const screen3 = document.getElementById('screen-3');
-            screen3.classList.remove('hidden');
-            
-            // Bring the timeline screen into view gently
-            gsap.fromTo("#screen-3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 });
-        }
-    });
-});
-
-// Listener placeholder for our upcoming features step
-document.getElementById('proceed-to-vault').addEventListener('click', () => {
-    alert("🎉 Phase 2 Complete! The timeline is locked in. Let's design Phase 3 next to unlock the Nickname Scrapbook & Game Center!");
-});
-// Locate your existing proceedBtn event block at the bottom and replace it with this:
-proceedBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Stops the envelope overlay from resetting unexpectedly
-    
-    // Transition Screen 2 to Screen 3 smoothly using GSAP
-    gsap.to("#screen-2", {
-        opacity: 0,
-        y: -30,
-        duration: 0.5,
-        onComplete: () => {
-            screen2.classList.add('hidden');
-            
-            const screen3 = document.getElementById('screen-3');
-            screen3.classList.remove('hidden');
-            
-            // Bring the timeline screen into view gently
-            gsap.fromTo("#screen-3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 });
-        }
-    });
-});
-
-// Listener placeholder for our upcoming features step
-document.getElementById('proceed-to-vault').addEventListener('click', () => {
-    alert("🎉 Phase 2 Complete! The timeline is locked in. Let's design Phase 3 next to unlock the Nickname Scrapbook & Game Center!");
-});
-// --- 1. The Dynamic Nickname Memory Mapping Data ---
-const memoryDatabase = {
-    poori: {
-        title: "The Poori Misra Legacy 🫓",
-        desc: "First deployed by Akshat on 08/08/2025 at 19:57 right after an intensive school project block. A playful, definitive spin on your official name that set the foundation for dropping formal prefixes entirely."
-    },
-    pookie: {
-        title: "The Midnight 3AM Outpouring 🎀🐥",
-        desc: "Unsealed on 21/01/2026 at 03:15 AM. Following a highly stressful school cycle, formal filters melted away completely to reveal total, unconditional appreciation: 'itta pyaar aara mko... pookie pookie'."
-    },
-    piggy: {
-        title: "The Great Rabbit Rejection 🐷",
-        desc: "Codified on 25/02/2026 at 19:13. Akshat dropped the definitive animal tags 'Piggo' and 'Piggy'. You immediately tried to claim defensive alternative totems ('Nahhh... Rabbit hu mai 👻'), but the pig layout won permanently!"
-    },
-    dino: {
-        title: "The Morning Routine Dinosaur Roar Rex 🦖",
-        desc: "Claimed with massive morning energy on 30/01/2026 at 08:47. You blew up the log feed with extended roaring text markers because Akshat managed to beat his standard routine timings and get ready early."
-    }
+// Navigation Events
+document.getElementById('open-gift-btn').onclick = () => {
+    document.getElementById('bg-music').play().catch(()=>{});
+    switchScreen('#screen-1', '#screen-2');
 };
 
+document.getElementById('interactive-envelope').onclick = function() {
+    this.classList.add('open');
+};
+
+document.getElementById('proceed-to-timeline').onclick = (e) => {
+    e.stopPropagation();
+    switchScreen('#screen-2', '#screen-3');
+};
+
+document.getElementById('proceed-to-vault').onclick = () => {
+    switchScreen('#screen-3', '#screen-4');
+};
+
+const memoryDatabase = {
+    pookie: { title: "Pookie Moment", desc: "21/01/2026 at 03:15: 'pookie pookie' term deployment." },
+    piggy: { title: "Piggy Debates", desc: "25/02/2026 at 19:13: The absolute definitive animal code integration." }
+};
 function revealMemory(key) {
-    const data = memoryDatabase[key];
-    document.getElementById('popup-title').innerText = data.title;
-    document.getElementById('popup-desc').innerText = data.desc;
+    document.getElementById('popup-title').innerText = memoryDatabase[key].title;
+    document.getElementById('popup-desc').innerText = memoryDatabase[key].desc;
     document.getElementById('memory-popup').classList.add('active');
 }
-
-function closeMemory() {
-    document.getElementById('memory-popup').classList.remove('active');
-}
-
-// --- 2. Screen 5: Custom Dynamic Reasons Engine ---
-const personalizedReasons = [
-    "The complete sincerity and dedication you bring to your work as house captain.",
-    "The fact that no matter how stressful things get, you find time to balance it out.",
-    "Your classic defense phrase 'Bikul dafa ho jao... Nazar mtt aana' when handling deep affection.",
-    "How you consistently choose to stay up or balance your schedule just to maintain synchronization.",
-    "The rare clarity you have when giving deep life advice during late-night discussion windows."
-];
-let currentReasonIndex = 0;
-
-document.getElementById('next-reason-btn').addEventListener('click', () => {
-    currentReasonIndex = (currentReasonIndex + 1) % personalizedReasons.length;
-    document.getElementById('current-reason').style.opacity = 0;
-    
-    setTimeout(() => {
-        document.getElementById('current-reason').innerText = `"${personalizedReasons[currentReasonIndex]}"`;
-        document.getElementById('current-reason').style.opacity = 1;
-    }, 200);
-});
-
-// --- 3. Screen Navigation Routing Connectors ---
-document.getElementById('proceed-to-vault').onclick = () => {
-    gsap.to("#screen-3", { opacity: 0, y: -30, duration: 0.5, onComplete: () => {
-        document.getElementById('screen-3').classList.add('hidden');
-        document.getElementById('screen-4').classList.remove('hidden');
-        gsap.fromTo("#screen-4", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 });
-    }});
-};
+function closeMemory() { document.getElementById('memory-popup').classList.remove('active'); }
 
 document.getElementById('proceed-to-game').onclick = () => {
-    gsap.to("#screen-4", { opacity: 0, y: -30, duration: 0.5, onComplete: () => {
-        document.getElementById('screen-4').classList.add('hidden');
-        document.getElementById('screen-6').classList.remove('hidden');
-        gsap.fromTo("#screen-6", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, onComplete: spawnHearts });
-    }});
+    switchScreen('#screen-4', '#screen-6', spawnHearts);
 };
 
-// --- 4. Screen 6: Interactive Heart Target Generation Loop ---
-let collectedHeartsCount = 0;
-const totalTargetHearts = 5;
-
+// Game Logic
+let score = 0;
 function spawnHearts() {
-    const boundary = document.getElementById('game-boundary');
-    boundary.innerHTML = ""; // Clear pool safety checks
-    
-    for (let i = 0; i < totalTargetHearts; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'target-heart';
-        heart.innerHTML = '❤️';
-        
-        // Randomly scatter elements safely within the grid container boundaries
-        const xPos = Math.random() * (boundary.offsetWidth - 40);
-        const yPos = Math.random() * (boundary.offsetHeight - 40);
-        
-        heart.style.left = `${xPos}px`;
-        heart.style.top = `${yPos}px`;
-        
-        // Add random staggered delay rates to float configurations
-        heart.style.animationDelay = `${Math.random() * 2}s`;
-        
-        // Interaction tap registration hook
-        heart.addEventListener('click', function() {
-            if (!this.classList.contains('clicked')) {
-                this.classList.add('clicked');
-                collectedHeartsCount++;
-                document.getElementById('score-counter').innerText = collectedHeartsCount;
-                
-                // Pop animation effect via GSAP
-                gsap.to(this, { scale: 0, opacity: 0, duration: 0.3, onComplete: () => this.remove() });
-                
-                if (collectedHeartsCount === totalTargetHearts) {
-                    document.getElementById('proceed-to-cake').classList.remove('hidden-btn');
-                    gsap.fromTo("#proceed-to-cake", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4 });
-                }
+    const b = document.getElementById('game-boundary'); b.innerHTML = "";
+    for(let i=0; i<5; i++) {
+        const h = document.createElement('div'); h.className='target-heart'; h.innerHTML='❤️';
+        h.style.left = Math.random()*(b.offsetWidth-30)+'px'; h.style.top = Math.random()*(b.offsetHeight-30)+'px';
+        h.onclick = function() {
+            this.remove(); score++; document.getElementById('score-counter').innerText = score;
+            if(score === 5) { 
+                const btn = document.getElementById('proceed-to-cake'); btn.classList.remove('hidden-btn');
             }
-        });
-        boundary.appendChild(heart);
+        };
+        b.appendChild(h);
     }
 }
 
-// Connector hook for upcoming finale phase sequence
 document.getElementById('proceed-to-cake').onclick = () => {
-    alert("🎂 Minigame Concluded! Let's enter Phase 4 next to unseal the Virtual Cake and Deploy Live to GitHub Pages!");
+    switchScreen('#screen-6', '#screen-7');
 };
-// Replace your old proceed-to-cake listener at the bottom with this:
-document.getElementById('proceed-to-cake').onclick = () => {
-    gsap.to("#screen-6", { opacity: 0, y: -30, duration: 0.5, onComplete: () => {
-        document.getElementById('screen-6').classList.add('hidden');
-        document.getElementById('screen-7').classList.remove('hidden');
-        gsap.fromTo("#screen-7", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 });
-    }});
+
+// Cake blowout
+document.getElementById('birthday-cake').onclick = function() {
+    document.getElementById('flame').style.display = 'none';
+    initConfetti();
+    document.getElementById('proceed-to-promises').classList.remove('hidden-btn');
 };
+
+document.getElementById('proceed-to-promises').onclick = () => {
+    switchScreen('#screen-7', '#screen-8');
+};
+
+document.getElementById('proceed-to-vault-screen').onclick = () => {
+    switchScreen('#screen-8', '#screen-9');
+};
+
+// Vault validation
+document.getElementById('unlock-vault-btn').onclick = () => {
+    const pass = document.getElementById('vault-password').value.trim().toLowerCase();
+    if(pass === "piggy") {
+        switchScreen('#screen-9', '#screen-10');
+    } else {
+        document.getElementById('vault-error').classList.remove('hidden-btn');
+    }
+};
+
+// Confetti Setup
+function initConfetti() {
+    const c = document.getElementById('confetti-canvas'); const cc = c.getContext('2d');
+    c.width = window.innerWidth; c.height = window.innerHeight;
+    let p = []; for(let i=0; i<100; i++) p.push({x:Math.random()*c.width, y:Math.random()*c.height-c.height, r:Math.random()*5+3, d:Math.random()*3+2});
+    function draw() {
+        cc.clearRect(0,0,c.width,c.height); cc.fillStyle="pink";
+        let active = false;
+        p.forEach(part => { if(part.y < c.height) { active=true; part.y+=part.d; cc.beginPath(); cc.arc(part.x, part.y, part.r, 0, Math.PI*2); cc.fill(); } });
+        if(active) requestAnimationFrame(draw);
+    }
+    draw();
+}
