@@ -149,3 +149,118 @@ proceedBtn.addEventListener('click', (e) => {
 document.getElementById('proceed-to-vault').addEventListener('click', () => {
     alert("🎉 Phase 2 Complete! The timeline is locked in. Let's design Phase 3 next to unlock the Nickname Scrapbook & Game Center!");
 });
+// --- 1. The Dynamic Nickname Memory Mapping Data ---
+const memoryDatabase = {
+    poori: {
+        title: "The Poori Misra Legacy 🫓",
+        desc: "First deployed by Akshat on 08/08/2025 at 19:57 right after an intensive school project block. A playful, definitive spin on your official name that set the foundation for dropping formal prefixes entirely."
+    },
+    pookie: {
+        title: "The Midnight 3AM Outpouring 🎀🐥",
+        desc: "Unsealed on 21/01/2026 at 03:15 AM. Following a highly stressful school cycle, formal filters melted away completely to reveal total, unconditional appreciation: 'itta pyaar aara mko... pookie pookie'."
+    },
+    piggy: {
+        title: "The Great Rabbit Rejection 🐷",
+        desc: "Codified on 25/02/2026 at 19:13. Akshat dropped the definitive animal tags 'Piggo' and 'Piggy'. You immediately tried to claim defensive alternative totems ('Nahhh... Rabbit hu mai 👻'), but the pig layout won permanently!"
+    },
+    dino: {
+        title: "The Morning Routine Dinosaur Roar Rex 🦖",
+        desc: "Claimed with massive morning energy on 30/01/2026 at 08:47. You blew up the log feed with extended roaring text markers because Akshat managed to beat his standard routine timings and get ready early."
+    }
+};
+
+function revealMemory(key) {
+    const data = memoryDatabase[key];
+    document.getElementById('popup-title').innerText = data.title;
+    document.getElementById('popup-desc').innerText = data.desc;
+    document.getElementById('memory-popup').classList.add('active');
+}
+
+function closeMemory() {
+    document.getElementById('memory-popup').classList.remove('active');
+}
+
+// --- 2. Screen 5: Custom Dynamic Reasons Engine ---
+const personalizedReasons = [
+    "The complete sincerity and dedication you bring to your work as house captain.",
+    "The fact that no matter how stressful things get, you find time to balance it out.",
+    "Your classic defense phrase 'Bikul dafa ho jao... Nazar mtt aana' when handling deep affection.",
+    "How you consistently choose to stay up or balance your schedule just to maintain synchronization.",
+    "The rare clarity you have when giving deep life advice during late-night discussion windows."
+];
+let currentReasonIndex = 0;
+
+document.getElementById('next-reason-btn').addEventListener('click', () => {
+    currentReasonIndex = (currentReasonIndex + 1) % personalizedReasons.length;
+    document.getElementById('current-reason').style.opacity = 0;
+    
+    setTimeout(() => {
+        document.getElementById('current-reason').innerText = `"${personalizedReasons[currentReasonIndex]}"`;
+        document.getElementById('current-reason').style.opacity = 1;
+    }, 200);
+});
+
+// --- 3. Screen Navigation Routing Connectors ---
+document.getElementById('proceed-to-vault').onclick = () => {
+    gsap.to("#screen-3", { opacity: 0, y: -30, duration: 0.5, onComplete: () => {
+        document.getElementById('screen-3').classList.add('hidden');
+        document.getElementById('screen-4').classList.remove('hidden');
+        gsap.fromTo("#screen-4", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 });
+    }});
+};
+
+document.getElementById('proceed-to-game').onclick = () => {
+    gsap.to("#screen-4", { opacity: 0, y: -30, duration: 0.5, onComplete: () => {
+        document.getElementById('screen-4').classList.add('hidden');
+        document.getElementById('screen-6').classList.remove('hidden');
+        gsap.fromTo("#screen-6", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, onComplete: spawnHearts });
+    }});
+};
+
+// --- 4. Screen 6: Interactive Heart Target Generation Loop ---
+let collectedHeartsCount = 0;
+const totalTargetHearts = 5;
+
+function spawnHearts() {
+    const boundary = document.getElementById('game-boundary');
+    boundary.innerHTML = ""; // Clear pool safety checks
+    
+    for (let i = 0; i < totalTargetHearts; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'target-heart';
+        heart.innerHTML = '❤️';
+        
+        // Randomly scatter elements safely within the grid container boundaries
+        const xPos = Math.random() * (boundary.offsetWidth - 40);
+        const yPos = Math.random() * (boundary.offsetHeight - 40);
+        
+        heart.style.left = `${xPos}px`;
+        heart.style.top = `${yPos}px`;
+        
+        // Add random staggered delay rates to float configurations
+        heart.style.animationDelay = `${Math.random() * 2}s`;
+        
+        // Interaction tap registration hook
+        heart.addEventListener('click', function() {
+            if (!this.classList.contains('clicked')) {
+                this.classList.add('clicked');
+                collectedHeartsCount++;
+                document.getElementById('score-counter').innerText = collectedHeartsCount;
+                
+                // Pop animation effect via GSAP
+                gsap.to(this, { scale: 0, opacity: 0, duration: 0.3, onComplete: () => this.remove() });
+                
+                if (collectedHeartsCount === totalTargetHearts) {
+                    document.getElementById('proceed-to-cake').classList.remove('hidden-btn');
+                    gsap.fromTo("#proceed-to-cake", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4 });
+                }
+            }
+        });
+        boundary.appendChild(heart);
+    }
+}
+
+// Connector hook for upcoming finale phase sequence
+document.getElementById('proceed-to-cake').onclick = () => {
+    alert("🎂 Minigame Concluded! Let's enter Phase 4 next to unseal the Virtual Cake and Deploy Live to GitHub Pages!");
+};
