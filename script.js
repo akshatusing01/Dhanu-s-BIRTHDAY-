@@ -264,3 +264,108 @@ function spawnHearts() {
 document.getElementById('proceed-to-cake').onclick = () => {
     alert("🎂 Minigame Concluded! Let's enter Phase 4 next to unseal the Virtual Cake and Deploy Live to GitHub Pages!");
 };
+// Replace your old proceed-to-cake listener at the bottom with this:
+document.getElementById('proceed-to-cake').onclick = () => {
+    gsap.to("#screen-6", { opacity: 0, y: -30, duration: 0.5, onComplete: () => {
+        document.getElementById('screen-6').classList.add('hidden');
+        document.getElementById('screen-7').classList.remove('hidden');
+        gsap.fromTo("#screen-7", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 });
+    }});
+};
+
+// --- 1. Screen 7: Interactive Blow Out Candle Flame Event ---
+const cake = document.getElementById('birthday-cake');
+cake.addEventListener('click', () => {
+    const flame = document.getElementById('flame');
+    if (flame.style.display !== 'none') {
+        flame.style.display = 'none'; // Snuff flame graphics
+        
+        // Trigger Full Screen Canvas Confetti Engine
+        initConfetti();
+        
+        // Show navigation button to advance screens
+        const nextBtn = document.getElementById('proceed-to-promises');
+        nextBtn.classList.remove('hidden-btn');
+        gsap.fromTo("#proceed-to-promises", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4 });
+    }
+});
+
+// --- 2. Screen 7 & 8 Router Links ---
+document.getElementById('proceed-to-promises').onclick = () => {
+    gsap.to("#screen-7", { opacity: 0, y: -30, duration: 0.5, onComplete: () => {
+        document.getElementById('screen-7').classList.add('hidden');
+        document.getElementById('screen-8').classList.remove('hidden');
+        gsap.fromTo("#screen-8", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 });
+    }});
+};
+
+document.getElementById('proceed-to-vault-screen').onclick = () => {
+    gsap.to("#screen-8", { opacity: 0, y: -30, duration: 0.5, onComplete: () => {
+        document.getElementById('screen-8').classList.add('hidden');
+        document.getElementById('screen-9').classList.remove('hidden');
+        gsap.fromTo("#screen-9", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 });
+    }});
+};
+
+// --- 3. Screen 9: Custom Vault Validation Engine ---
+document.getElementById('unlock-vault-btn').onclick = () => {
+    const inputVal = document.getElementById('vault-password').value.trim().toLowerCase();
+    
+    // The Password answer is piggy matching the definitive 25/02 inside joke threshold
+    if(inputVal === "piggy" || inputVal === "piggo") {
+        document.getElementById('vault-error').classList.add('hidden-btn');
+        gsap.to("#screen-9", { opacity: 0, scale: 0.9, duration: 0.5, onComplete: () => {
+            document.getElementById('screen-9').classList.add('hidden');
+            document.getElementById('screen-10').classList.remove('hidden');
+            gsap.fromTo("#screen-10", { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 1.2 });
+        }});
+    } else {
+        document.getElementById('vault-error').classList.remove('hidden-btn');
+    }
+};
+
+// --- 4. Canvas Confetti Particle Engine ---
+const cCanvas = document.getElementById('confetti-canvas');
+const cCtx = cCanvas.getContext('2d');
+let confettiPieces = [];
+
+function initConfetti() {
+    cCanvas.width = window.innerWidth;
+    cCanvas.height = window.innerHeight;
+    
+    for (let i = 0; i < 150; i++) {
+        confettiPieces.push({
+            x: Math.random() * cCanvas.width,
+            y: Math.random() * cCanvas.height - cCanvas.height,
+            r: Math.random() * 6 + 4,
+            d: Math.random() * cCanvas.height * 0.015 + 2,
+            color: `hsl(${Math.random() * 360}, 100%, 65%)`,
+            tilt: Math.random() * 10 - 5
+        });
+    }
+    animateConfetti();
+}
+
+function animateConfetti() {
+    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+    let activeParticles = false;
+    
+    confettiPieces.forEach(p => {
+        if (p.y < cCanvas.height) {
+            activeParticles = true;
+            p.y += p.d;
+            p.x += p.tilt;
+            
+            cCtx.beginPath();
+            cCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            cCtx.fillStyle = p.color;
+            cCtx.fill();
+        }
+    });
+    
+    if (activeParticles) {
+        requestAnimationFrame(animateConfetti);
+    } else {
+        cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height); // Post-render clean up canvas buffer bounds
+    }
+}
