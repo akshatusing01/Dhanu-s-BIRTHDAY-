@@ -124,3 +124,28 @@ proceedBtn.addEventListener('click', (e) => {
 document.getElementById('proceed-to-vault').addEventListener('click', () => {
     alert("🎉 Phase 2 Complete! The timeline is locked in. Let's design Phase 3 next to unlock the Nickname Scrapbook & Game Center!");
 });
+// Locate your existing proceedBtn event block at the bottom and replace it with this:
+proceedBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Stops the envelope overlay from resetting unexpectedly
+    
+    // Transition Screen 2 to Screen 3 smoothly using GSAP
+    gsap.to("#screen-2", {
+        opacity: 0,
+        y: -30,
+        duration: 0.5,
+        onComplete: () => {
+            screen2.classList.add('hidden');
+            
+            const screen3 = document.getElementById('screen-3');
+            screen3.classList.remove('hidden');
+            
+            // Bring the timeline screen into view gently
+            gsap.fromTo("#screen-3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 });
+        }
+    });
+});
+
+// Listener placeholder for our upcoming features step
+document.getElementById('proceed-to-vault').addEventListener('click', () => {
+    alert("🎉 Phase 2 Complete! The timeline is locked in. Let's design Phase 3 next to unlock the Nickname Scrapbook & Game Center!");
+});
