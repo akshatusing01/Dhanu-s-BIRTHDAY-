@@ -1,0 +1,297 @@
+/* --- Core Configuration & Variables --- */
+:root {
+    --bg-midnight: #060214;
+    --glass-fill: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --gold: #ffd700;
+    --romantic-pink: #ff758f;
+    --envelope-color: #311845;
+    --envelope-inside: #210d30;
+    --letter-bg: #fffbf2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-midnight);
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
+
+#starfield {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- Screen Architecture --- */
+.site-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.site-screen.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    pointer-events: none;
+}
+
+/* --- Glassmorphism UI Components (Screen 1) --- */
+.glass-container {
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 2.5rem;
+    border-radius: 28px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    text-align: center;
+    max-width: 540px;
+    width: 100%;
+}
+
+.hero-header .tagline {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #a49fbf;
+    margin-bottom: 0.5rem;
+}
+
+.hero-header .main-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.8rem;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255,117,143,0.5);
+}
+
+.countdown-box {
+    margin: 2.5rem 0;
+}
+
+.box-label {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--romantic-pink);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+#countdown {
+    display: flex;
+    justify-content: space-between;
+}
+
+.unit {
+    flex: 1;
+    position: relative;
+}
+
+.unit:not(:last-child)::after {
+    content: ":";
+    position: absolute;
+    right: 0;
+    top: 10%;
+    font-size: 2rem;
+    color: rgba(255,255,255,0.15);
+}
+
+.unit span {
+    font-size: 2.6rem;
+    font-weight: 600;
+    display: block;
+    background: linear-gradient(to bottom, #fff, #c2b9db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.unit label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #a49fbf;
+}
+
+.main-btn {
+    background: linear-gradient(135deg, var(--romantic-pink) 0%, #ff4b72 100%);
+    border: none;
+    padding: 1.1rem 2.8rem;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255, 117, 143, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.main-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 117, 143, 0.6);
+}
+
+.audio-hint {
+    font-size: 0.75rem;
+    color: #a49fbf;
+    margin-top: 0.8rem;
+    opacity: 0.8;
+}
+
+/* ================= SCREEN 2: ENVELOPE 3D ARCHITECTURE ================= */
+.envelope-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.envelope {
+    position: relative;
+    width: 450px;
+    height: 300px;
+    background-color: var(--envelope-color);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    border-radius: 0 0 12px 12px;
+    cursor: pointer;
+    perspective: 1000px; /* Crucial for 3D Flap Flip */
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 225px solid transparent;
+    border-right: 225px solid transparent;
+    border-top: 150px solid var(--envelope-color);
+    transform-origin: top;
+    z-index: 5;
+    transition: transform 0.5s ease;
+}
+
+.pocket {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 225px solid transparent;
+    border-right: 225px solid transparent;
+    border-bottom: 150px solid var(--envelope-inside);
+    z-index: 4;
+    border-radius: 0 0 12px 12px;
+}
+
+/* The Secret Letter Inner Layout */
+.letter {
+    position: absolute;
+    bottom: 10px;
+    left: 25px;
+    width: 400px;
+    height: 260px;
+    background-color: var(--letter-bg);
+    padding: 1.8rem;
+    border-radius: 8px;
+    z-index: 3;
+    color: #2b251a;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transform: translateY(0);
+    transition: transform 0.5s ease, height 0.5s ease;
+}
+
+.letter-text {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.letter h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--envelope-color);
+}
+
+.letter p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+}
+
+.letter-heart {
+    font-size: 1.5rem;
+    display: block;
+    text-align: center;
+    margin-bottom: 0.2rem;
+}
+
+.inline-btn {
+    background: var(--envelope-color);
+    border: none;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.tap-instruction {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: var(--romantic-pink);
+    letter-spacing: 1px;
+    animation: flash 2s infinite;
+}
+
+/* State changes run via JS classes */
+.envelope.open .flap {
+    transform: rotateX(180deg);
+    z-index: 2; /* Drops behind letter once flipped */
+}
+
+.envelope.open .letter {
+    transform: translateY(-160px);
+    height: 420px; /* Letter grows outwards dynamically */
+    z-index: 6; /* Pops in front of entire envelope assembly */
+}
+
+.envelope.open .letter-text {
+    opacity: 1;
+}
+
+@keyframes flash {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+    .envelope { width: 320px; height: 220px; }
+    .flap { border-left-width: 160px; border-right-width: 160px; border-top-width: 110px; }
+    .pocket { border-left-width: 160px; border-right-width: 160px; border-bottom-width: 110px; }
+    .letter { width: 280px; left: 20px; }
+    .envelope.open .letter { transform: translateY(-180px); height: 380px; }
+    .hero-header .main-title { font-size: 2.8rem; }
+}
