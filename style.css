@@ -1,13 +1,14 @@
-/* --- Core Configuration & Variables --- */
+/* --- Global Resets & Theme Configuration --- */
 :root {
-    --bg-midnight: #060214;
-    --glass-fill: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --gold: #ffd700;
-    --romantic-pink: #ff758f;
-    --envelope-color: #311845;
-    --envelope-inside: #210d30;
-    --letter-bg: #fffbf2;
+    --bg-dark: #0a051b;
+    --card-glow: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --text-primary: #ffffff;
+    --text-muted: #b3aed2;
+    --accent-gold: #ffd700;
+    --accent-pink: #ff758f;
+    --font-sans: 'Poppins', sans-serif;
+    --font-romantic: 'Dancing Script', cursive;
 }
 
 * {
@@ -20,278 +21,372 @@ body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: var(--bg-midnight);
-    font-family: 'Poppins', sans-serif;
-    color: #ffffff;
+    background-color: var(--bg-dark);
+    font-family: var(--font-sans);
+    color: var(--text-primary);
 }
 
+/* --- Starry Canvas Layout --- */
 #starfield {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     z-index: 1;
     pointer-events: none;
 }
 
-/* --- Screen Architecture --- */
-.site-screen {
-    position: absolute;
+/* --- Main Interface Container (Glassmorphism layout) --- */
+.landing-container {
+    position: relative;
+    z-index: 2;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 2;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 2rem;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.site-screen.hidden {
-    opacity: 0;
-    transform: translateY(30px);
-    pointer-events: none;
-}
-
-/* --- Glassmorphism UI Components (Screen 1) --- */
-.glass-container {
-    background: var(--glass-fill);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 2.5rem;
-    border-radius: 28px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    padding: 3rem 1.5rem;
     text-align: center;
-    max-width: 540px;
-    width: 100%;
+    background: radial-gradient(circle at center, rgba(31, 14, 69, 0.4) 0%, transparent 70%);
 }
 
-.hero-header .tagline {
-    font-size: 0.85rem;
-    letter-spacing: 3px;
+/* --- Hero Typography Styles --- */
+.hero-section {
+    margin-top: 1.5rem;
+}
+
+.pre-title {
+    font-size: 0.9rem;
     text-transform: uppercase;
-    color: #a49fbf;
+    letter-spacing: 3px;
+    color: var(--text-muted);
     margin-bottom: 0.5rem;
 }
 
-.hero-header .main-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3.8rem;
-    color: #fff;
-    text-shadow: 0 0 15px rgba(255,117,143,0.5);
+.target-name {
+    font-family: var(--font-romantic);
+    font-size: 4rem;
+    color: var(--text-primary);
+    text-shadow: 0 0 20px rgba(255, 117, 143, 0.6), 0 0 40px rgba(255, 215, 0, 0.3);
+    margin-bottom: 0.5rem;
 }
 
-.countdown-box {
-    margin: 2.5rem 0;
+.sparkle {
+    display: inline-block;
+    animation: floating 3s ease-in-out infinite;
 }
 
-.box-label {
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+.sub-caption {
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+/* --- Countdown Component Layout --- */
+.countdown-wrapper {
+    width: 100%;
+    max-width: 550px;
+    background: var(--card-glow);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.countdown-headline {
+    font-size: 0.85rem;
     text-transform: uppercase;
-    color: var(--romantic-pink);
-    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    color: var(--accent-pink);
+    margin-bottom: 1.5rem;
     font-weight: 600;
 }
 
 #countdown {
     display: flex;
     justify-content: space-between;
-}
-
-.unit {
-    flex: 1;
-    position: relative;
-}
-
-.unit:not(:last-child)::after {
-    content: ":";
-    position: absolute;
-    right: 0;
-    top: 10%;
-    font-size: 2rem;
-    color: rgba(255,255,255,0.15);
-}
-
-.unit span {
-    font-size: 2.6rem;
-    font-weight: 600;
-    display: block;
-    background: linear-gradient(to bottom, #fff, #c2b9db);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.unit label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #a49fbf;
-}
-
-.main-btn {
-    background: linear-gradient(135deg, var(--romantic-pink) 0%, #ff4b72 100%);
-    border: none;
-    padding: 1.1rem 2.8rem;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(255, 117, 143, 0.4);
-    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
 }
 
-.main-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(255, 117, 143, 0.6);
-}
-
-.audio-hint {
-    font-size: 0.75rem;
-    color: #a49fbf;
-    margin-top: 0.8rem;
-    opacity: 0.8;
-}
-
-/* ================= SCREEN 2: ENVELOPE 3D ARCHITECTURE ================= */
-.envelope-wrapper {
+.time-box {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
 }
 
-.envelope {
-    position: relative;
-    width: 450px;
-    height: 300px;
-    background-color: var(--envelope-color);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    border-radius: 0 0 12px 12px;
-    cursor: pointer;
-    perspective: 1000px; /* Crucial for 3D Flap Flip */
-}
-
-.flap {
+.time-box:not(:last-child)::after {
+    content: ":";
     position: absolute;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-left: 225px solid transparent;
-    border-right: 225px solid transparent;
-    border-top: 150px solid var(--envelope-color);
-    transform-origin: top;
-    z-index: 5;
-    transition: transform 0.5s ease;
+    right: 0;
+    top: 15%;
+    font-size: 2rem;
+    color: var(--card-border);
 }
 
-.pocket {
-    position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 0;
-    border-left: 225px solid transparent;
-    border-right: 225px solid transparent;
-    border-bottom: 150px solid var(--envelope-inside);
-    z-index: 4;
-    border-radius: 0 0 12px 12px;
+.time-box span {
+    font-size: 2.8rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(to bottom, #ffffff, #d3cce3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* The Secret Letter Inner Layout */
-.letter {
-    position: absolute;
-    bottom: 10px;
-    left: 25px;
-    width: 400px;
-    height: 260px;
-    background-color: var(--letter-bg);
-    padding: 1.8rem;
-    border-radius: 8px;
-    z-index: 3;
-    color: #2b251a;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
-    overflow: hidden;
-    transform: translateY(0);
-    transition: transform 0.5s ease, height 0.5s ease;
-}
-
-.letter-text {
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.letter h2 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.2rem;
-    margin-bottom: 0.5rem;
-    color: var(--envelope-color);
-}
-
-.letter p {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    margin-bottom: 0.8rem;
-}
-
-.letter-heart {
-    font-size: 1.5rem;
-    display: block;
-    text-align: center;
-    margin-bottom: 0.2rem;
-}
-
-.inline-btn {
-    background: var(--envelope-color);
-    border: none;
-    color: white;
-    padding: 0.5rem 1.2rem;
-    font-size: 0.85rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    margin-top: 0.5rem;
-}
-
-.tap-instruction {
-    margin-top: 2rem;
-    font-size: 0.85rem;
-    color: var(--romantic-pink);
+.time-box label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
     letter-spacing: 1px;
-    animation: flash 2s infinite;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
 }
 
-/* State changes run via JS classes */
-.envelope.open .flap {
-    transform: rotateX(180deg);
-    z-index: 2; /* Drops behind letter once flipped */
+/* --- Action Trigger Button Styling --- */
+.action-footer {
+    width: 100%;
+    margin-bottom: 1.5rem;
 }
 
-.envelope.open .letter {
-    transform: translateY(-160px);
-    height: 420px; /* Letter grows outwards dynamically */
-    z-index: 6; /* Pops in front of entire envelope assembly */
+.cta-button {
+    background: linear-gradient(135deg, #ff758f 0%, #ff7eb3 100%);
+    border: none;
+    padding: 1.2rem 3rem;
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255, 117, 143, 0.4), inset 0 -4px 0 rgba(0,0,0,0.15);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: buttonPulse 2.5s infinite;
 }
 
-.envelope.open .letter-text {
-    opacity: 1;
+.cta-button:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(255, 117, 143, 0.6);
 }
 
-@keyframes flash {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+.cta-button:active {
+    transform: translateY(1px);
 }
 
+.music-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+    opacity: 0.7;
+}
+
+/* --- Interactive Keyframe Animations --- */
+@keyframes floating {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+@keyframes buttonPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 117, 143, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 117, 143, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 117, 143, 0); }
+}
+
+/* Responsive Scaling for smaller screens */
 @media (max-width: 480px) {
-    .envelope { width: 320px; height: 220px; }
-    .flap { border-left-width: 160px; border-right-width: 160px; border-top-width: 110px; }
-    .pocket { border-left-width: 160px; border-right-width: 160px; border-bottom-width: 110px; }
-    .letter { width: 280px; left: 20px; }
-    .envelope.open .letter { transform: translateY(-180px); height: 380px; }
-    .hero-header .main-title { font-size: 2.8rem; }
+    .target-name { font-size: 2.8rem; }
+    .time-box span { font-size: 2rem; }
+    .countdown-wrapper { padding: 1.5rem 1rem; }
+    .cta-button { padding: 1rem 2.2rem; font-size: 1rem; }
+}
+
+/* ================= SCREEN 3: TIMELINE ARCHITECTURE ================= */
+.site-screen.scrollable {
+    overflow-y: auto;
+    display: block; /* Allows natural layout flow for scrolling */
+    height: 100%;
+}
+
+/* Custom scrollbar to keep things stylish */
+.site-screen.scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+.site-screen.scrollable::-webkit-scrollbar-thumb {
+    background: var(--romantic-pink);
+    border-radius: 10px;
+}
+
+.timeline-container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+    position: relative;
+}
+
+.timeline-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.timeline-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-header h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: #fff;
+}
+
+.timeline-header p {
+    color: #a49fbf;
+    font-size: 0.95rem;
+}
+
+/* The Core Vertical Spine */
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 180px;
+    bottom: 120px;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--romantic-pink), var(--gold), transparent);
+    transform: translateX(-50%);
+}
+
+/* Individual Timeline Rows */
+.timeline-item {
+    position: relative;
+    width: 50%;
+    margin-bottom: 3.5rem;
+    display: flex;
+}
+
+.timeline-item.left {
+    left: 0;
+    padding-right: 3rem;
+    justify-content: flex-end;
+}
+
+.timeline-item.right {
+    left: 50%;
+    padding-left: 3rem;
+    justify-content: flex-start;
+}
+
+/* Center Nodes */
+.timeline-dot {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: var(--bg-midnight);
+    border: 3px solid var(--gold);
+    border-radius: 50%;
+    top: 25px;
+    z-index: 4;
+}
+
+.timeline-item.left .timeline-dot { right: -7px; }
+.timeline-item.right .timeline-dot { left: -7px; }
+
+/* Memory Display Cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1.8rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.item-date {
+    font-size: 0.75rem;
+    color: var(--romantic-pink);
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.glass-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+    color: #fff;
+}
+
+.context-text {
+    font-size: 0.8rem;
+    color: #b3aed2;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+}
+
+/* WhatsApp-Style Conversational Interface */
+.chat-bubble {
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+    margin-bottom: 0.6rem;
+    max-width: 90%;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.left-bubble {
+    background-color: #26163a;
+    border-left: 3px solid var(--romantic-pink);
+    margin-right: auto;
+}
+
+.right-bubble {
+    background-color: #17263c;
+    border-left: 3px solid #3a86ff;
+    margin-left: auto;
+}
+
+.sender-name {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.15rem;
+    color: var(--gold);
+}
+
+.inside-joke-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    background: rgba(255, 215, 0, 0.1);
+    color: var(--gold);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.timeline-footer {
+    text-align: center;
+    margin-top: 4rem;
+    width: 100%;
+}
+
+/* Mobile Responsiveness for Scrolling Components */
+@media (max-width: 768px) {
+    .timeline-line { left: 20px; }
+    .timeline-item { width: 100%; left: 0 !important; padding-left: 2.5rem !important; padding-right: 0 !important; }
+    .timeline-dot { left: 14px !important; }
+    .glass-card { max-width: 100%; }
 }
