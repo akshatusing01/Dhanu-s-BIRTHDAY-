@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Digital Journey for Poorvi ✨</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <canvas id="starfield"></canvas>
+
+    <audio id="bg-music" src="music.mp3" loop></audio>
+
+    <section id="screen-1" class="site-screen active">
+        <div class="glass-container landing-card">
+            <header class="hero-header">
+                <p class="tagline">A Digital Time Capsule Dedicated To</p>
+                <h1 class="main-title">Poorvi Mishra <span class="sparkle">✨</span></h1>
+                <p class="sub-tag">Red House Captain 🔴 & Yellow House Vice Captain 🟡</p>
+            </header>
+
+            <div class="countdown-box">
+                <p class="box-label">The Journey Continues In...</p>
+                <div id="countdown">
+                    <div class="unit"><span id="days">00</span><label>Days</label></div>
+                    <div class="unit"><span id="hours">00</span><label>Hrs</label></div>
+                    <div class="unit"><span id="minutes">00</span><label>Mins</label></div>
+                    <div class="unit"><span id="seconds">00</span><label>Secs</label></div>
+                </div>
+            </div>
+
+            <footer class="action-zone">
+                <button id="open-gift-btn" class="main-btn">
+                    <span>🎁</span> Open Your Gift
+                </button>
+                <p class="audio-hint">🎵 Best experienced with music turned on</p>
+            </footer>
+        </div>
+    </section>
+
+    <section id="screen-2" class="site-screen hidden">
+        <div class="envelope-wrapper">
+            <div class="envelope" id="interactive-envelope">
+                <div class="flap"></div>
+                <div class="pocket"></div>
+                <div class="letter" id="unfolding-letter">
+                    <div class="letter-text">
+                        <span class="letter-heart">❤️</span>
+                        <h2>Hey Poorvi,</h2>
+                        <p>Welcome to your digital time capsule. This isn't just a webpage—it is a live museum tracking every milestone, every joke, and every single memory we have shared since our very first interaction.</p>
+                        <p>Every single detail from our chat logs is archived right here. Scroll down to unlock your timeline...</p>
+                        <button id="proceed-to-timeline" class="inline-btn">Next: Unseal Timeline ➜</button>
+                    </div>
+                </div>
+            </div>
+            <p class="tap-instruction">✉️ Tap the envelope flap to open your letter</p>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
