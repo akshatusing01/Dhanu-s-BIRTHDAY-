@@ -10,7 +10,6 @@
 <body>
 
     <canvas id="starfield"></canvas>
-
     <audio id="bg-music" src="music.mp3" loop></audio>
 
     <section id="screen-1" class="site-screen active">
@@ -20,7 +19,6 @@
                 <h1 class="main-title">Poorvi Mishra <span class="sparkle">✨</span></h1>
                 <p class="sub-tag">Red House Captain 🔴 & Yellow House Vice Captain 🟡</p>
             </header>
-
             <div class="countdown-box">
                 <p class="box-label">The Journey Continues In...</p>
                 <div id="countdown">
@@ -30,11 +28,8 @@
                     <div class="unit"><span id="seconds">00</span><label>Secs</label></div>
                 </div>
             </div>
-
             <footer class="action-zone">
-                <button id="open-gift-btn" class="main-btn">
-                    <span>🎁</span> Open Your Gift
-                </button>
+                <button id="open-gift-btn" class="main-btn">🎁 Open Your Gift</button>
                 <p class="audio-hint">🎵 Best experienced with music turned on</p>
             </footer>
         </div>
@@ -45,12 +40,12 @@
             <div class="envelope" id="interactive-envelope">
                 <div class="flap"></div>
                 <div class="pocket"></div>
-                <div class="letter" id="unfolding-letter">
+                <div class="letter">
                     <div class="letter-text">
                         <span class="letter-heart">❤️</span>
                         <h2>Hey Poorvi,</h2>
-                        <p>Welcome to your digital time capsule. This isn't just a webpage—it is a live museum tracking every milestone, every joke, and every single memory we have shared since our very first interaction.</p>
-                        <p>Every single detail from our chat logs is archived right here. Scroll down to unlock your timeline...</p>
+                        <p>Welcome to your digital time capsule. This is a live museum tracking every milestone, every joke, and every single memory we have shared since our very first interaction.</p>
+                        <p>Scroll down to unlock your timeline...</p>
                         <button id="proceed-to-timeline" class="inline-btn">Next: Unseal Timeline ➜</button>
                     </div>
                 </div>
@@ -59,10 +54,6 @@
         </div>
     </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
     <section id="screen-3" class="site-screen hidden scrollable">
         <div class="timeline-container">
             <header class="timeline-header">
@@ -70,24 +61,21 @@
                 <h2>Our Shared History</h2>
                 <p>Scroll down to walk through our favorite chapters...</p>
             </header>
-
             <div class="timeline-line"></div>
-
+            
             <div class="timeline-item left">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content glass-card">
                     <span class="item-date">30 July 2025 | 13:48</span>
                     <h3>Chapter 1: The Inception 🎬</h3>
-                    <p class="context-text">Where it all began. Just two house captains trying to sort out school logistics, completely unaware of what this would turn into.</p>
                     <div class="chat-bubble left-bubble">
                         <p class="sender-name">Akshat</p>
-                        <p class="message-text">"Kal father s baat krne chlteee hain... Islie isko ksi aur date p rkhwate hain..."</p>
+                        <p class="message-text">"Kal father s baat krne chlteee hain..."</p>
                     </div>
                     <div class="chat-bubble left-bubble">
                         <p class="sender-name">Akshat</p>
                         <p class="message-text">"Tere house me na mai captain tko hi maanta hu... Maaaii to hu na!! 🫱🏻‍🫲🏼"</p>
                     </div>
-                    <span class="inside-joke-badge">📍 Birth of the "Karondd" Teasing Loop</span>
                 </div>
             </div>
 
@@ -96,14 +84,13 @@
                 <div class="timeline-content glass-card">
                     <span class="item-date">18 August 2025 | 19:13</span>
                     <h3>Chapter 2: The Guardian Pillar 🛡️</h3>
-                    <p class="context-text">When things shifted from formal school check-ins to deep personal support. You realized you always had someone looking out for you.</p>
                     <div class="chat-bubble right-bubble">
                         <p class="sender-name">Poorvi</p>
-                        <p class="message-text">"Aree me sab kar sakti hu but I need self respect atleast... Busy itne hu ke depression ka time hee nahi hai"</p>
+                        <p class="message-text">"Busy itne hu ke depression ka time hee nahi hai"</p>
                     </div>
                     <div class="chat-bubble left-bubble">
                         <p class="sender-name">Akshat</p>
-                        <p class="message-text">"To be honest Poori! Tuu naa sbse zyda deserving house Captain hai... sachme Beta"</p>
+                        <p class="message-text">"To be honest Poori! Tuu naa sbse zyda deserving house Captain hai..."</p>
                     </div>
                 </div>
             </div>
@@ -113,27 +100,9 @@
                 <div class="timeline-content glass-card">
                     <span class="item-date">25 December 2025 | 02:06</span>
                     <h3>Chapter 3: The Midnight Thesis 🎄</h3>
-                    <p class="context-text">In the dead of winter, after months of late-night conversations and shared history, the absolute truth was spoken aloud.</p>
                     <div class="chat-bubble left-bubble">
                         <p class="sender-name">Akshat</p>
                         <p class="message-text">"We guys had unbreakable bond 🩵"</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item right">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content glass-card">
-                    <span class="item-date">26 January 2026 | 17:51</span>
-                    <h3>Chapter 4: The Allegiance Pact 🔐</h3>
-                    <p class="context-text">The moment the boundaries changed permanently. No longer just close friends—completely exclusive emotional partners.</p>
-                    <div class="chat-bubble left-bubble">
-                        <p class="sender-name">Akshat</p>
-                        <p class="message-text">"Mko Itna maan lete hain 💔🎀💫pr abb mai 😭sif tera Na 🙏🏻🙏🏻booked forever"</p>
-                    </div>
-                    <div class="chat-bubble right-bubble">
-                        <p class="sender-name">Poorvi</p>
-                        <p class="message-text">"Yayyyyyyyyyyy..... Dinasourrrrrrrrrr Rex 🦖👻👻"</p>
                     </div>
                 </div>
             </div>
@@ -143,4 +112,77 @@
             </footer>
         </div>
     </section>
-    
+
+    <section id="screen-4" class="site-screen hidden scrollable">
+        <div class="vault-container">
+            <header class="vault-header">
+                <h2>The Custom Archive 🐷</h2>
+            </header>
+            <div class="polaroid-grid">
+                <div class="polaroid-card" onclick="revealMemory('pookie')">
+                    <div class="polaroid-frame"><div class="photo-placeholder">🎀🐥</div><p class="polaroid-label">Pookie</p></div>
+                </div>
+                <div class="polaroid-card" onclick="revealMemory('piggy')">
+                    <div class="polaroid-frame"><div class="photo-placeholder">🐷</div><p class="polaroid-label">Piggy</p></div>
+                </div>
+            </div>
+            <div id="memory-popup" class="hidden-popup" onclick="closeMemory()">
+                <div class="popup-content"><h4 id="popup-title"></h4><p id="popup-desc"></p></div>
+            </div>
+            <button id="proceed-to-game" class="main-btn">Enter Game 🎮</button>
+        </div>
+    </section>
+
+    <section id="screen-6" class="site-screen hidden">
+        <div class="game-container">
+            <h2>Heart Collector ❤️</h2>
+            <div class="score-board">Hearts: <span id="score-counter">0</span> / 5</div>
+            <div id="game-boundary"></div>
+            <button id="proceed-to-cake" class="main-btn hidden-btn">Next: Cake 🎂</button>
+        </div>
+    </section>
+
+    <section id="screen-7" class="site-screen hidden">
+        <div class="cake-container">
+            <h2>Make a Wish... 🎂</h2>
+            <div class="cake-wrapper" id="birthday-cake">
+                <div class="candle-flame" id="flame"></div>
+                <div class="candle-wick"></div>
+                <div class="candle-body"></div>
+                <div class="cake-top-layer"></div>
+                <div class="cake-bottom-layer"></div>
+            </div>
+            <button id="proceed-to-promises" class="main-btn hidden-btn">Next ➜</button>
+        </div>
+    </section>
+
+    <section id="screen-8" class="site-screen hidden">
+        <div class="promises-container">
+            <h2>Future Track 🗺️</h2>
+            <div class="promises-grid">
+                <div class="promise-card glass-card"><h4>The First Real Trip 📍</h4></div>
+            </div>
+            <button id="proceed-to-vault-screen" class="main-btn">Vault 🔒</button>
+        </div>
+    </section>
+
+    <section id="screen-9" class="site-screen hidden">
+        <div class="vault-auth-box glass-card">
+            <h3>Unseal Final Code 🔒</h3>
+            <input type="text" id="vault-password" placeholder="Password is piggy...">
+            <button id="unlock-vault-btn" class="inline-btn">Verify</button>
+            <p id="vault-error" class="error-msg hidden-btn">❌ Wrong Code</p>
+        </div>
+    </section>
+
+    <section id="screen-10" class="site-screen hidden">
+        <div class="cinematic-finale">
+            <h1 class="grand-birthday-wish">Happy Birthday, Poorvi! ❤️</h1>
+        </div>
+    </section>
+
+    <canvas id="confetti-canvas"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
