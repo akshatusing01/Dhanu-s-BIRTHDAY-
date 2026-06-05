@@ -1,297 +1,79 @@
-/* --- Global Resets & Theme Configuration --- */
 :root {
-    --bg-dark: #0a051b;
-    --card-glow: rgba(255, 255, 255, 0.06);
-    --card-border: rgba(255, 255, 255, 0.12);
-    --text-primary: #ffffff;
-    --text-muted: #b3aed2;
-    --accent-gold: #ffd700;
-    --accent-pink: #ff758f;
-    --font-sans: 'Poppins', sans-serif;
-    --font-romantic: 'Dancing Script', cursive;
+    --bg-midnight: #060214;
+    --romantic-pink: #ff758f;
+    --gold: #ffd700;
 }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-midnight); font-family: 'Poppins', sans-serif; color: white; }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+#starfield { position: absolute; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
-body, html {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-color: var(--bg-dark);
-    font-family: var(--font-sans);
-    color: var(--text-primary);
-}
-
-/* --- Starry Canvas Layout --- */
-#starfield {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* --- Main Interface Container (Glassmorphism layout) --- */
-.landing-container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+/* FIX: Yeh property ensure karegi ki saare screens ek ke upar ek merge na hon */
+.site-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 5;
+    display: none; /* Hide standard layers entirely */
+    justify-content: center;
     align-items: center;
-    padding: 3rem 1.5rem;
-    text-align: center;
-    background: radial-gradient(circle at center, rgba(31, 14, 69, 0.4) 0%, transparent 70%);
-}
-
-/* --- Hero Typography Styles --- */
-.hero-section {
-    margin-top: 1.5rem;
-}
-
-.pre-title {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-}
-
-.target-name {
-    font-family: var(--font-romantic);
-    font-size: 4rem;
-    color: var(--text-primary);
-    text-shadow: 0 0 20px rgba(255, 117, 143, 0.6), 0 0 40px rgba(255, 215, 0, 0.3);
-    margin-bottom: 0.5rem;
-}
-
-.sparkle {
-    display: inline-block;
-    animation: floating 3s ease-in-out infinite;
-}
-
-.sub-caption {
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-    font-weight: 300;
-}
-
-/* --- Countdown Component Layout --- */
-.countdown-wrapper {
-    width: 100%;
-    max-width: 550px;
-    background: var(--card-glow);
-    border: 1px solid var(--card-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     padding: 2rem;
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    background: var(--bg-midnight);
 }
-
-.countdown-headline {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--accent-pink);
-    margin-bottom: 1.5rem;
-    font-weight: 600;
+.site-screen.active {
+    display: flex !important; /* Content will display only when active */
 }
-
-#countdown {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.time-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-.time-box:not(:last-child)::after {
-    content: ":";
-    position: absolute;
-    right: 0;
-    top: 15%;
-    font-size: 2rem;
-    color: var(--card-border);
-}
-
-.time-box span {
-    font-size: 2.8rem;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    background: linear-gradient(to bottom, #ffffff, #d3cce3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.time-box label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    margin-top: 0.25rem;
-}
-
-/* --- Action Trigger Button Styling --- */
-.action-footer {
-    width: 100%;
-    margin-bottom: 1.5rem;
-}
-
-.cta-button {
-    background: linear-gradient(135deg, #ff758f 0%, #ff7eb3 100%);
-    border: none;
-    padding: 1.2rem 3rem;
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: white;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(255, 117, 143, 0.4), inset 0 -4px 0 rgba(0,0,0,0.15);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    animation: buttonPulse 2.5s infinite;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 15px 30px rgba(255, 117, 143, 0.6);
-}
-
-.cta-button:active {
-    transform: translateY(1px);
-}
-
-.music-hint {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 0.75rem;
-    opacity: 0.7;
-}
-
-/* --- Interactive Keyframe Animations --- */
-@keyframes floating {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(5deg); }
-}
-
-@keyframes buttonPulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 117, 143, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(255, 117, 143, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 117, 143, 0); }
-}
-
-/* Responsive Scaling for smaller screens */
-@media (max-width: 480px) {
-    .target-name { font-size: 2.8rem; }
-    .time-box span { font-size: 2rem; }
-    .countdown-wrapper { padding: 1.5rem 1rem; }
-    .cta-button { padding: 1rem 2.2rem; font-size: 1rem; }
-}
-
-/* ================= SCREEN 3: TIMELINE ARCHITECTURE ================= */
 .site-screen.scrollable {
     overflow-y: auto;
-    display: block; /* Allows natural layout flow for scrolling */
-    height: 100%;
+    display: none;
+}
+.site-screen.scrollable.active {
+    display: block !important;
 }
 
-/* Custom scrollbar to keep things stylish */
-.site-screen.scrollable::-webkit-scrollbar {
-    width: 6px;
-}
-.site-screen.scrollable::-webkit-scrollbar-thumb {
-    background: var(--romantic-pink);
-    border-radius: 10px;
-}
+.hidden { display: none !important; }
+.hidden-btn { display: none !important; }
 
-.timeline-container {
-    max-width: 850px;
-    margin: 0 auto;
-    padding: 4rem 1rem;
-    position: relative;
-}
+/* Rest CSS Compression */
+.glass-container, .glass-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; text-align: center; max-width: 500px; width: 100%; }
+.main-title { font-family: 'Dancing Script', cursive; font-size: 3.5rem; }
+#countdown { display: flex; justify-content: space-around; margin: 2rem 0; }
+.unit span { font-size: 2.5rem; font-weight: bold; display: block; }
+.main-btn { background: var(--romantic-pink); border: none; padding: 1rem 2rem; color: white; font-weight: bold; border-radius: 50px; cursor: pointer; }
 
-.timeline-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
+/* Envelope Setup */
+.envelope-wrapper { position: relative; }
+.envelope { width: 300px; height: 200px; background: #311845; position: relative; cursor: pointer; }
+.flap { position: absolute; top:0; width:0; height:0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 100px solid #311845; transform-origin: top; transition: 0.4s; z-index:2; }
+.pocket { position: absolute; bottom:0; width:0; height:0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 100px solid #210d30; z-index:1; }
+.letter { position: absolute; bottom: 5px; left: 15px; width: 270px; height: 180px; background: white; color: black; padding: 1rem; z-index:0; transition: 0.4s; }
+.envelope.open .flap { transform: rotateX(180deg); }
+.envelope.open .letter { transform: translateY(-120px); height: 250px; z-index: 3; }
 
-.timeline-icon {
-    font-size: 2.5rem;
-    display: block;
-    margin-bottom: 0.5rem;
-}
+/* Timeline UI */
+.timeline-container { max-width: 700px; margin: 0 auto; padding: 2rem 1rem; position: relative; }
+.timeline-line { position: absolute; left: 50%; top: 100px; bottom: 100px; width: 2px; background: var(--romantic-pink); transform: translateX(-50%); }
+.timeline-item { position: relative; width: 50%; margin: 2rem 0; }
+.timeline-item.left { left:0; padding-right: 2rem; }
+.timeline-item.right { left:50%; padding-left: 2rem; }
+.chat-bubble { padding: 0.5rem; border-radius: 10px; margin: 0.5rem 0; color: white; font-size: 0.85rem; }
+.left-bubble { background: #26163a; } .right-bubble { background: #17263c; }
 
-.timeline-header h2 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3.5rem;
-    color: #fff;
-}
+/* Game Boundary */
+#game-boundary { width: 100%; height: 300px; background: rgba(255,255,255,0.02); position: relative; margin: 1rem 0; }
+.target-heart { position: absolute; font-size: 2rem; cursor: pointer; }
 
-.timeline-header p {
-    color: #a49fbf;
-    font-size: 0.95rem;
-}
+/* Cake Setup */
+.cake-wrapper { width: 150px; height: 150px; margin: 2rem auto; position: relative; }
+.candle-body { width: 10px; height: 40px; background: red; position: absolute; left: 47%; bottom: 40px; }
+.candle-flame { width: 12px; height: 20px; background: orange; position: absolute; left: 47%; bottom: 82px; border-radius: 50%; }
+.cake-top-layer { width: 100px; height: 40px; background: purple; position: absolute; bottom: 0; left: 25px; }
 
-/* The Core Vertical Spine */
-.timeline-line {
-    position: absolute;
-    left: 50%;
-    top: 180px;
-    bottom: 120px;
-    width: 2px;
-    background: linear-gradient(to bottom, transparent, var(--romantic-pink), var(--gold), transparent);
-    transform: translateX(-50%);
-}
-
-/* Individual Timeline Rows */
-.timeline-item {
-    position: relative;
-    width: 50%;
-    margin-bottom: 3.5rem;
-    display: flex;
-}
-
-.timeline-item.left {
-    left: 0;
-    padding-right: 3rem;
-    justify-content: flex-end;
-}
-
-.timeline-item.right {
-    left: 50%;
-    padding-left: 3rem;
-    justify-content: flex-start;
-}
-
-/* Center Nodes */
-.timeline-dot {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    background-color: var(--bg-midnight);
-    border: 3px solid var(--gold);
-    border-radius: 50%;
-    top: 25px;
-    z-index: 4;
-}
+.polaroid-grid { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; }
+.polaroid-frame { background: white; padding: 1rem; color: black; }
+.photo-placeholder { font-size: 2rem; }
+.hidden-popup { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; }
+.hidden-popup.active { display: flex; }
+.popup-content { background: white; color: black; padding: 2rem; border-radius: 10px; }
+.cinematic-finale h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; }
+#confetti-canvas { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 999; }
