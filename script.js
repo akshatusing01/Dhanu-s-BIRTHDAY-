@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     setInterval(runCountdown, 1000); runCountdown();
 
-    // 3. Central Routing Interface Layout Handler
+    // 3. Central Routing Interface Layout Handler (Fixed display conflicts)
     function switchScreen(currentSelector, nextSelector, callback) {
-        gsap.to(currentSelector, { opacity: 0, duration: 0.2, onComplete: () => {
+        gsap.to(currentSelector, { opacity: 0, duration: 0.25, onComplete: () => {
             const curr = document.querySelector(currentSelector);
             if(curr) { curr.classList.add('hidden'); curr.classList.remove('active'); }
             
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }});
     }
 
-    // 4. Safe Button Explicit Event Interceptors
+    // 4. Envelope Interactions & Interceptors
     document.getElementById('open-gift-btn').onclick = () => {
         document.getElementById('bg-music').play().catch(()=>{});
         switchScreen('#screen-1', '#screen-2');
