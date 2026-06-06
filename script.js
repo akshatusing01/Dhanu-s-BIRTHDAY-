@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     setInterval(runCountdown, 1000); runCountdown();
 
-    // 3. Central Routing Interface Layout Handler (Fixed display conflicts)
+    // 3. Central Routing Interface Layout Handler
     function switchScreen(currentSelector, nextSelector, callback) {
-        gsap.to(currentSelector, { opacity: 0, duration: 0.25, onComplete: () => {
+        gsap.to(currentSelector, { opacity: 0, duration: 0.2, onComplete: () => {
             const curr = document.querySelector(currentSelector);
             if(curr) { curr.classList.add('hidden'); curr.classList.remove('active'); }
             
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }});
     }
 
-    // 4. Envelope Interactions & Interceptors
+    // 4. Button Event Interceptors
     document.getElementById('open-gift-btn').onclick = () => {
         document.getElementById('bg-music').play().catch(()=>{});
         switchScreen('#screen-1', '#screen-2');
@@ -90,38 +90,47 @@ document.addEventListener("DOMContentLoaded", function() {
         switchScreen('#screen-7', '#screen-8');
     };
 
-    // 5. PurviGPT Dynamic Database Core Array
-    const chatLogsDatabase = [
-        { text: "Kal father s baat krne chlteee hain... Islie isko ksi aur date p rkhwate hain...", date: "30 Jul 2025", sender: "Akshat" },
-        { text: "Tere house me na mai captain tko hi maanta hu... Maaaii to hu na!! 🫱🏻‍🫲🏼", date: "30 Jul 2025", sender: "Akshat" },
-        { text: "Busy itne hu ke depression ka time hee nahi hai", date: "18 Aug 2025", sender: "Poorvi" },
-        { text: "To be honest Poori! Tuu naa sbse zyda deserving house Captain hai...", date: "18 Aug 2025", sender: "Akshat" },
-        { text: "We guys had unbreakable bond 🩵", date: "25 Dec 2025", sender: "Akshat" },
-        { text: "sif tera Na 🙏... booked forever", date: "26 Jan 2026", sender: "Akshat" },
-        { text: "Rabbit hu mai 👻... Piggy layout dropped permanently!", date: "25 Feb 2026", sender: "Poorvi" }
-    ];
-
+    // 5. Puvui AI Memory Matching Core Engine
     const searchBtn = document.getElementById('gpt-search-btn');
     const queryInput = document.getElementById('gpt-query');
     const resultsBox = document.getElementById('gpt-results-box');
+
+    const puvuiSpecialMemories = {
+        "pookie": "25th Feb 2026 ko tune bola tha na 'Rabbit hu mai 👻... Piggy layout dropped permanently!'. Baaki pookie behavior to tera peak pr rhta h jb tu gussa hoti h. Pr reality yehi h, pure system ki main anchor tu hi h.",
+        "rabbit": "25th Feb 2026 ko tune bola tha na 'Rabbit hu mai 👻... Piggy layout dropped permanently!'. Baaki pookie behavior to tera peak pr rhta h jb tu gussa hoti h. Pr reality yehi h, pure system ki main anchor tu hi h.",
+        "piggy": "25th Feb 2026 ko tune bola tha na 'Rabbit hu mai 👻... Piggy layout dropped permanently!'. Baaki pookie behavior to tera peak pr rhta h jb tu gussa hoti h. Pr reality yehi h, pure system ki main anchor tu hi h.",
+        "8 november": "8th November! Annual Day logistics, house captain duties, uniform me idhr udhr bhagna, aur schedules check krna. Vhi s chizen coordination s un-breakable bond m bdlna shuru hui thi.",
+        "annual day": "8th November! Annual Day logistics, house captain duties, uniform me idhr udhr bhagna, aur schedules check krna. Vhi s chizen coordination s un-breakable bond m bdlna shuru hui thi.",
+        "15 august 2025": "15 August 2025. Red House Captain 🔴 aur Yellow House Vice Captain 🟡 standing tall. Parade manage krna, badges fix krna, aur house duties ka pressure ek sath handle krna like real captains.",
+        "26 january 2026": "26th Jan 2026. The permanent log entry: 'sif tera Na 🙏... booked forever'. Isme koi aur code update nahi ho skta ab.",
+        "april 2026": "April 2026. No screens, no long-distance chat delays. Jb tu ghr aayi aur poori timeline ekdum real lgne lgi. Core memory forever archived.",
+        "came home": "April 2026. No screens, no long-distance chat delays. Jb tu ghr aayi aur poori timeline ekdum real lgne lgi. Core memory forever archived."
+    };
 
     if(searchBtn) {
         searchBtn.onclick = () => {
             const val = queryInput.value.trim().toLowerCase();
             if(!val) return;
-            const matches = chatLogsDatabase.filter(l => l.text.toLowerCase().includes(val));
+            
             resultsBox.innerHTML = "";
             resultsBox.classList.remove('hidden');
-            if(matches.length === 0) {
-                resultsBox.innerHTML = `<p class="no-results-msg">No entries found for "${val}".</p>`;
-                return;
+            
+            let matchedText = "";
+            for (let key in puvuiSpecialMemories) {
+                if (val.includes(key)) {
+                    matchedText = puvuiSpecialMemories[key];
+                    break;
+                }
             }
-            matches.forEach(m => {
+            
+            if(matchedText) {
                 const b = document.createElement('div');
-                b.className = `chat-bubble ${m.sender === 'Akshat' ? 'left-bubble' : 'right-bubble'}`;
-                b.innerHTML = `<p class="sender-name">${m.sender} | ${m.date}</p><p class="message-text">${m.text}</p>`;
+                b.className = `chat-bubble right-bubble`;
+                b.innerHTML = `<p class=\"sender-name\">Puvui Engine</p><p class=\"message-text\">${matchedText}</p>`;
                 resultsBox.appendChild(b);
-            });
+            } else {
+                resultsBox.innerHTML = `<p class=\"no-results-msg\">Type something like her nicknames or our special dates to unseal records.</p>`;
+            }
         };
     }
 
@@ -135,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('sb-card-1').onclick = () => mixVoice('audio1');
     document.getElementById('sb-card-2').onclick = () => mixVoice('audio2');
 
-    // 7. Testing Music Streams Configuration Module
+    // 7. Background Tracks Setup
     const testMusicTracks = {
         tayHai: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         thodiDer: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
@@ -150,18 +159,16 @@ document.addEventListener("DOMContentLoaded", function() {
         activeBackgroundTrack = new Audio(testMusicTracks[key]);
         activeBackgroundTrack.loop = true;
         activeBackgroundTrack.play().catch(()=>{});
-        
-        const labels = { tayHai: "Playing: Tay Hai Vibe (Test)", thodiDer: "Playing: Thodi Der Vibe (Test)", perfect: "Playing: Perfect Vibe (Test)" };
-        document.getElementById('track-status').innerText = labels[key];
+        document.getElementById('track-status').innerText = `Playing Selected Track...`;
     }
     document.getElementById('track-btn-tay').onclick = () => playDynamicSong('tayHai');
     document.getElementById('track-btn-thodi').onclick = () => playDynamicSong('thodiDer');
     document.getElementById('track-btn-perfect').onclick = () => playDynamicSong('perfect');
 
-    // 8. Expanded Photo Popup Engine Matrix
+    // 8. Photo Popup Engine Data Map
     const expandedMemories = {
-        pookie: { title: "Pookie Deployment 🎀", desc: "Official code registration logged at midnight when routine logs got overwhelming." },
-        piggy: { title: "The Piggy Debate 🐷", desc: "Long-standing historical animal totem argument logs tracking back to February." },
+        pookie: { title: "Pookie Deployment 🎀", desc: "The sudden shift from a responsible house captain to your absolute peak childish pookie behavior." },
+        piggy: { title: "The Piggy Debate 🐷", desc: "Your hilarious defense protocols during our great animal totem debates!" },
         "first-day": { title: "The School Anchor 🔴🟡", desc: "How a standard work schedule evolved straight into a permanent unsealed conversation link." }
     };
     function revealMemory(key) {
@@ -176,28 +183,35 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('memory-popup').classList.remove('active');
     };
 
-    // 9. 100 Reasons Infinite Generator Loop Setup
+    // 9. 100 Reasons Exhaustion Tracking Pool Logic (Zero Repeat Glitches)
     const hundredReasonsList = [
-        "The flawless way your smile instantly fully resets my worst days. 🪻",
+        "The incredible way your emotional intelligence holds everything together even when the routine gets heavy.",
+        "Your flawless positive attitude that completely resets my worst moods with just a single text.",
+        "The sudden shift from a responsible house captain to your absolute peak childish pookie behavior.",
+        "Your rock-solid principles and the deep gratitude you show for the smallest things in life.",
+        "The way you handle everything jab school ya house duties ka load ek sath aa jata hai.",
+        "Tera voh sudden chota bacha ban jana jb mood thik hota hai.",
+        "Voh late night 3 AM tak khinchne wali chats jisme hum faltu logistics s shuru hoke deep chale jaate hain.",
+        "Tera rock-solid attitude jb tu kisi cheez par stand leti hai.",
         "How fiercely dedicated you are when managing your house captain responsibilities. 🔴🟡",
-        "Your random late-night text switches that turn into deep logical conversations.",
-        "The way you call out my absolute nonsense without hesitation. 🧠",
-        "Your voice notes that completely change the dynamic of my entire routine.",
-        "The fact that we can talk about completely normal house logistics and somehow still end up chatting daily until 3 AM. 💗",
-        "Your hilarious defense protocols during our great animal totem debates! 🐷",
         "The simple reality that you make an unbreakable bond feel completely natural and secure. 🩵",
         "Your weird habits that you think are annoying, but are actually my absolute favorite parts of your personality."
     ];
-    let lastReasonIndex = 0;
+    
+    let depletionTrackerPool = [...hundredReasonsList];
+
     document.getElementById('next-reason-btn').onclick = () => {
-        let randIndex = Math.floor(Math.random() * hundredReasonsList.length);
-        while(randIndex === lastReasonIndex) {
-            randIndex = Math.floor(Math.random() * hundredReasonsList.length);
+        if (depletionTrackerPool.length === 0) {
+            depletionTrackerPool = [...hundredReasonsList]; // Reset array entirely once fully exhausted
         }
-        lastReasonIndex = randIndex;
+        
+        let randIndex = Math.floor(Math.random() * depletionTrackerPool.length);
+        let selectedReasonText = depletionTrackerPool.splice(randIndex, 1)[0];
+        let originalReasonIndex = hundredReasonsList.indexOf(selectedReasonText) + 1;
+
         gsap.to("#reason-text-output", { opacity: 0, scale: 0.9, duration: 0.15, onComplete: () => {
-            document.getElementById('reason-text-output').innerText = `"${hundredReasonsList[randIndex]}"`;
-            document.getElementById('card-index-num').innerText = randIndex + 1;
+            document.getElementById('reason-text-output').innerText = `"${selectedReasonText}"`;
+            document.getElementById('card-index-num').innerText = originalReasonIndex;
             gsap.to("#reason-text-output", { opacity: 1, scale: 1, duration: 0.2 });
         }});
     };
@@ -228,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('proceed-to-promises').classList.remove('hidden-btn');
     };
 
-    // 12. Security Verification Core Access Pass
+    // 12. Security Verification Access Pass
     document.getElementById('unlock-vault-btn').onclick = () => {
         const p = document.getElementById('vault-password').value.trim().toLowerCase();
         if(p === "piggy") {
@@ -238,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
-    // 13. High-Speed Particle Canvas Confetti System
+    // 13. Particle Canvas Confetti System
     function initConfetti() {
         const c = document.getElementById('confetti-canvas'); const cc = c.getContext('2d');
         c.width = window.innerWidth; c.height = window.innerHeight;
