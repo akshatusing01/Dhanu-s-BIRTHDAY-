@@ -111,7 +111,7 @@
             </header>
             <div class="sound-grid">
                 <div class="sound-card" id="sb-card-1">
-                    <div class="tape-icon">盒</div><span>Cute Message</span>
+                    <div class="tape-icon">📼</div><span>Cute Message</span>
                 </div>
                 <div class="sound-card" id="sb-card-2">
                     <div class="tape-icon">🎤</div><span>Funny Voice</span>
@@ -120,27 +120,70 @@
             <audio id="audio1" src="voice1.mp3"></audio>
             <audio id="audio2" src="voice2.mp3"></audio>
             
-            <button id="proceed-to-vault" class="main-btn">Unlock Nickname Vault 🔐</button>
+            <button id="proceed-to-vault" class="main-btn">Unlock Memory Gallery 📸</button>
         </div>
     </section>
 
-<section id="screen-4" class="site-screen hidden">
+    <section id="screen-4" class="site-screen hidden scrollable">
         <div class="vault-container">
             <header class="vault-header">
-                <h2>The Custom Archive 🐷</h2>
+                <h2>The Memory Gallery 📸</h2>
+                <p>Tap a polaroid to reveal the memory behind it!</p>
             </header>
-            <div class="polaroid-grid">
-                <div class="polaroid-card" id="polaroid-pookie">
-                    <div class="polaroid-frame"><div class="photo-placeholder">🎀🐥</div><p class="polaroid-label">Pookie</p></div>
+
+            <div class="polaroid-grid-expanded">
+                <div class="polaroid-card-new" id="photo-pookie">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Memory 1">
+                    <p class="polaroid-label">Pookie Moments 🎀</p>
                 </div>
-                <div class="polaroid-card" id="polaroid-piggy">
-                    <div class="polaroid-frame"><div class="photo-placeholder">🐷</div><p class="polaroid-label">Piggy</p></div>
+                
+                <div class="polaroid-card-new" id="photo-piggy">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500" alt="Memory 2">
+                    <p class="polaroid-label">The Piggy Debate 🐷</p>
+                </div>
+
+                <div class="polaroid-card-new" id="photo-first-day">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500" alt="Memory 3">
+                    <p class="polaroid-label">The School Anchor 🔴🟡</p>
                 </div>
             </div>
+
+            <div class="glass-card song-selector-box">
+                <h4>Choose the Vibe Track 🎵</h4>
+                <div class="music-button-row">
+                    <button type="button" class="track-btn" id="track-btn-tay">🎵 Tay Hai</button>
+                    <button type="button" class="track-btn" id="track-btn-thodi">🎵 Thodi Der</button>
+                    <button type="button" class="track-btn" id="track-btn-perfect">🇬🇧 Perfect</button>
+                </div>
+                <p class="audio-status-text" id="track-status">Status: Click a track to play</p>
+            </div>
+
             <div id="memory-popup" class="hidden-popup">
-                <div class="popup-content"><h4 id="popup-title"></h4><p id="popup-desc"></p><span class="close-hint" id="close-popup-btn">Close</span></div>
+                <div class="popup-content">
+                    <h4 id="popup-title">Popup Title</h4>
+                    <p id="popup-desc">Popup Description</p>
+                    <span class="close-hint" id="close-popup-btn">Tap Close to go back</span>
+                </div>
             </div>
-            <button id="proceed-to-game" class="main-btn">Enter Game 🎮</button>
+
+            <button id="proceed-to-reasons" class="main-btn">Why I Love You? ➜</button>
+        </div>
+    </section>
+
+    <section id="screen-reasons" class="site-screen hidden">
+        <div class="glass-card reasons-container">
+            <span class="reasons-counter-badge">Reason Card #<span id="card-index-num">1</span></span>
+            
+            <div class="reason-card-display">
+                <p id="reason-text-output">"The flawless way your smile instantly completely resets my worst days." 🪻</p>
+            </div>
+
+            <div class="reasons-control-zone">
+                <button id="next-reason-btn" class="inline-btn-pink">Show Next Random Reason 🎲</button>
+                <p class="total-stats-hint">Over 100+ logical reasons compiled in logs</p>
+            </div>
+
+            <button id="proceed-to-game" class="main-btn">Proceed to Heart Collector 🎮</button>
         </div>
     </section>
 
@@ -182,4 +225,20 @@
             <h3>Unseal Final Code 🔒</h3>
             <input type="text" id="vault-password" placeholder="Type password here...">
             <button id="unlock-vault-btn" class="inline-btn">Verify</button>
-            <p id="vault-
+            <p id="vault-error" class="error-msg hidden-btn">❌ Wrong Code</p>
+        </div>
+    </section>
+
+    <section id="screen-9" class="site-screen hidden">
+        <div class="cinematic-finale">
+            <h1 class="grand-birthday-wish">Happy Birthday, Poorvi! ❤️</h1>
+            <p class="final-quote">"Booked Forever 🩵"</p>
+        </div>
+    </section>
+
+    <canvas id="confetti-canvas"></canvas>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
