@@ -1,14 +1,45 @@
+/* ==========================================================================
+   🎨 CHILDISH & PLAYFUL INTERFACE REHAUL
+   ========================================================================== */
+
 :root {
-    --bg-midnight: #060214;
-    --romantic-pink: #ff758f;
-    --gold: #ffd700;
+    --bg-playful: #fff0f5;       /* Soft lavender blush/pink */
+    --pookie-pink: #ff8fa3;     /* Bubbly pink */
+    --sky-blue: #4ea8de;        /* Soft sky blue */
+    --sunny-yellow: #ffd166;    /* Childish doodle yellow */
+    --dark-text: #2b2d42;       /* Soft charcoal instead of harsh black */
+    --notebook-line: #e5e5e5;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-midnight); font-family: 'Poppins', sans-serif; color: white; }
 
-#starfield { position: absolute; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Poppins', 'Comic Sans MS', cursive, sans-serif;
+}
 
-/* Fixed Screen Routing Layout Rules */
+body, html { 
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden; 
+    background: var(--bg-playful); 
+    color: var(--dark-text);
+}
+
+/* Custom background adjustments for falling stars/doodles */
+#starfield { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+    pointer-events: none; 
+    opacity: 0.6;
+}
+
+/* ==========================================================================
+   🏠 STRUCTURAL RESPONSIVE ENGINE CARDS
+   ========================================================================== */
+
 .site-screen {
     position: fixed;
     top: 0; left: 0;
@@ -17,122 +48,289 @@ body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-m
     display: none;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
-    background: var(--bg-midnight);
+    padding: 1.5rem;
+    background: var(--bg-playful);
 }
-.site-screen.active { display: flex !important; opacity: 1; }
 
-/* Fixed Scrollable Clashes */
-.site-screen.scrollable { 
-    overflow-y: auto !important; 
-    display: none; 
-    align-items: flex-start !important; 
-}
-.site-screen.scrollable.active { display: block !important; }
+.site-screen.active { display: flex !important; }
+.site-screen.scrollable { overflow-y: auto; display: none; }
+.site-screen.scrollable.active { display: block !important; padding-top: 3rem; }
 
 .hidden { display: none !important; }
 .hidden-btn { display: none !important; }
 
-.glass-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; text-align: center; max-width: 500px; width: 100%; margin: 0 auto; }
-.main-title { font-family: 'Dancing Script', cursive; font-size: 3.5rem; }
-#countdown { display: flex; justify-content: space-around; margin: 2rem 0; }
-.unit span { font-size: 2.5rem; font-weight: bold; display: block; }
-.main-btn { background: var(--romantic-pink); border: none; padding: 1rem 2rem; color: white; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top:1rem; position: relative; z-index: 10; }
+/* Bubbly Childish Glassmorphism (Looks like soft candy wrapping) */
+.glass-card { 
+    background: rgba(255, 255, 255, 0.85); 
+    border: 3px solid var(--pookie-pink); 
+    border-radius: 24px; 
+    padding: 2rem; 
+    box-shadow: 0px 12px 0px var(--pookie-pink);
+    color: var(--dark-text);
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    transform: rotate(-1deg); /* Funny casual tilting */
+}
 
-/* Envelope Style Engine */
-.envelope-container { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
-.envelope { width: 300px; height: 200px; background: #311845; position: relative; cursor: pointer; margin-bottom: 20px; z-index: 10; }
-.flap { position: absolute; top:0; width:0; height:0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 100px solid #311845; transform-origin: top; transition: transform 0.4s ease; z-index:2; }
-.pocket { position: absolute; bottom:0; width:0; height:0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 100px solid #210d30; z-index:1; }
-.letter { position: absolute; bottom: 5px; left: 15px; width: 270px; height: 180px; background: white; color: black; padding: 1rem; z-index:0; transition: transform 0.4s ease, height 0.4s ease; }
-.envelope.open .flap { transform: rotateX(180deg); z-index: 0; }
-.envelope.open .letter { transform: translateY(-120px); height: 260px; z-index: 3; }
-.inline-btn { background: var(--romantic-pink); color: white; border: none; padding: 0.5rem 1rem; margin-top: 1rem; border-radius: 4px; cursor: pointer; font-size:0.8rem; display: inline-block; position: relative; z-index: 20; }
-.tap-instruction { font-size: 0.8rem; color: #a49fbf; animation: pulse 1.5s infinite alternate; }
+/* ==========================================================================
+   🎈 BUTTONS & HEADERS
+   ========================================================================== */
 
-/* Timeline Visual Overhaul */
-.timeline-container { max-width: 700px; margin: 0 auto; padding: 2rem 1rem; position: relative; text-align: center; }
-.timeline-line { position: absolute; left: 50%; top: 180px; bottom: 150px; width: 2px; background: var(--romantic-pink); transform: translateX(-50%); z-index: 1; }
-.timeline-box { position: relative; width: 100%; margin: 2rem auto; display: flex; flex-direction: column; gap: 1.5rem; z-index: 2; }
-.timeline-item { position: relative; width: 85%; margin: 0 auto; text-align: left; }
-.timeline-item.left { margin-left: 0; }
-.timeline-item.right-item { margin-right: 0; text-align: right; }
+.main-btn {
+    background: var(--sunny-yellow);
+    color: var(--dark-text);
+    border: 3px solid var(--dark-text);
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0px 6px 0px var(--dark-text);
+    transition: all 0.1s ease-in-out;
+    margin-top: 1.5rem;
+    display: inline-block;
+}
 
-.card-adjust { padding: 1.2rem !important; text-align: left !important; background: rgba(255,255,255,0.07); }
-.highlight-bubble-border { border-right: 4px solid #4edf7a !important; }
-.special-akshat-box { border-left: 4px solid var(--romantic-pink) !important; }
+.main-btn:hover {
+    transform: translateY(3px);
+    box-shadow: 0px 3px 0px var(--dark-text);
+    background: #ffbd00;
+}
 
-.item-date { font-size: 0.7rem; color: var(--gold); font-weight: bold; display: block; margin-bottom: 0.4rem; }
-.chat-bubble { padding: 0.6rem; border-radius: 12px; margin: 0.4rem 0; color: white; font-size: 0.82rem; line-height: 1.4; display: inline-block; max-width: 100%; }
-.left-bubble { background: #26163a; text-align: left; }
-.dynamic-right-bubble { background: #17263c; text-align: left; display: block; }
+.inline-btn, .mini-btn {
+    background: var(--sky-blue);
+    color: white;
+    border: 2px solid var(--dark-text);
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 0px var(--dark-text);
+    margin: 5px;
+}
 
-.sender-name { font-size: 0.65rem; font-weight: bold; color: var(--romantic-pink); margin-bottom: 0.1rem; text-transform: uppercase; }
-.sender-name-right { font-size: 0.65rem; font-weight: bold; color: #4edf7a; margin-bottom: 0.1rem; text-transform: uppercase; }
+.inline-btn:hover {
+    transform: translateY(2px);
+    box-shadow: 0px 2px 0px var(--dark-text);
+}
 
-.dynamic-chapter-spacing { margin-top: 3.5rem !important; margin-bottom: 1.5rem !important; }
-.first-impression-card { text-align: left !important; margin: 1.5rem auto 2.5rem auto; border-left: 4px solid var(--gold) !important; }
-.heart-badge { background: rgba(255, 215, 0, 0.15); color: var(--gold); padding: 0.2rem 0.6rem; font-size: 0.65rem; font-weight: bold; border-radius: 4px; }
-.quote-confession { font-size: 0.82rem; line-height: 1.5; margin-top: 0.6rem; color: #ded9f0; font-style: italic; }
+.pulses {
+    animation: bubbleBounce 2s infinite ease-in-out;
+}
 
-/* PurviGPT Search Interface Layout */
-.ai-search-block { margin: 2.5rem auto; text-align: left !important; background: rgba(10, 5, 30, 0.6) !important; }
-.ai-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
-.bot-status { color: #4edf7a; font-size: 0.75rem; font-weight: bold; animation: pulse 1.5s infinite alternate; }
-.search-input-wrapper { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
-.search-input-wrapper input { flex: 1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 0.6rem; color: white; font-size: 0.85rem; }
-.search-input-wrapper button { background: var(--romantic-pink); border: none; color: white; padding: 0 1rem; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer; }
-.search-results-output { margin-top: 1rem; background: rgba(0,0,0,0.3); border-radius: 10px; padding: 0.8rem; max-height: 150px; overflow-y: auto; }
-.no-results-msg { font-size: 0.78rem; color: #ff4b72; text-align: center; font-style: italic; }
+@keyframes bubbleBounce {
+    0%, 100% { transform: scale(1) rotate(-1deg); }
+    50% { transform: scale(1.05) rotate(1deg); }
+}
 
-/* Soundboard Structures */
-.soundboard-container { max-width: 400px; width: 100%; }
-.sound-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
-.sound-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.2rem 0.5rem; text-align: center; cursor: pointer; }
-.sound-card:active { background: rgba(255,117,143,0.1); }
-.tape-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+/* ==========================================================================
+   ⏳ COUNTDOWN MODULE
+   ========================================================================== */
 
-/* Polaroid Grid Expanded Configurations */
-.polaroid-grid-expanded { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; width: 100%; max-width: 400px; margin: 1.5rem auto; }
-.polaroid-card-new { background: white; padding: 0.5rem; padding-bottom: 0.8rem; color: black; border-radius: 4px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.4); cursor: pointer; }
-.polaroid-card-new img { width: 100%; height: 100px; object-fit: cover; border-radius: 2px; }
-.polaroid-label { font-size: 0.68rem; font-weight: 600; margin-top: 0.4rem; font-family: 'Dancing Script', cursive; }
+.main-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: var(--pookie-pink);
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+}
 
-/* Audio Selector Panel */
-.song-selector-box { margin: 1.5rem auto; padding: 1rem !important; text-align: center; }
-.music-button-row { display: flex; gap: 0.4rem; justify-content: center; margin-top: 0.6rem; }
-.track-btn { flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: white; padding: 0.5rem 0.2rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; cursor: pointer; }
-.audio-status-text { font-size: 0.65rem; color: #a49fbf; margin-top: 0.5rem; }
+.tagline { font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; color: #888; }
+.sub-tag { font-size: 0.95rem; font-weight: 500; color: var(--sky-blue); margin-bottom: 1.5rem; }
 
-/* 100 Reasons Layout Deck Elements */
-.reasons-container { max-width: 380px !important; text-align: center; }
-.reasons-counter-badge { background: rgba(255, 117, 143, 0.15); color: var(--romantic-pink); padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: bold; border-radius: 30px; }
-.reason-card-display { background: rgba(0, 0, 0, 0.4); border: 1px dashed rgba(255,255,255,0.15); border-radius: 15px; padding: 2rem 1.2rem; margin: 1.5rem 0; min-height: 120px; display: flex; align-items: center; justify-content: center; }
-#reason-text-output { font-size: 0.88rem; line-height: 1.5; color: #fffbf2; font-style: italic; }
-.inline-btn-pink { background: var(--romantic-pink); border: none; color: white; padding: 0.7rem; font-size: 0.82rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; }
-.total-stats-hint { font-size: 0.62rem; color: #a49fbf; margin-top: 0.4rem; }
+.countdown-container {
+    background: white;
+    border: 3px dashed var(--sky-blue);
+    border-radius: 16px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+}
 
-/* Mini Games & Cake Output Graphics */
-#game-boundary { width: 100%; height: 260px; background: rgba(255,255,255,0.02); position: relative; margin: 1rem 0; border-radius: 10px; overflow: hidden; }
-.target-heart { position: absolute; font-size: 1.8rem; cursor: pointer; transition: transform 0.1s; user-select: none; }
-.cake-wrapper { width: 150px; height: 150px; margin: 2rem auto; position: relative; cursor: pointer; }
-.candle-body { width: 8px; height: 35px; background: #ff4b72; position: absolute; left: 47%; bottom: 40px; }
-.candle-flame { width: 12px; height: 20px; background: #ffb703; position: absolute; left: 45.5%; bottom: 75px; border-radius: 50%; box-shadow: 0 0 10px #ffb703; }
-.cake-top-layer { width: 100px; height: 40px; background: #b5179e; position: absolute; bottom: 0; left: 25px; border-radius: 5px 5px 0 0; }
-.cake-bottom-layer { width: 130px; height: 45px; background: #7209b7; position: absolute; bottom: -45px; left: 10px; border-radius: 5px 5px 0 0; }
+#countdown { display: flex; justify-content: space-around; margin-top: 0.5rem; }
+.unit { display: flex; flex-direction: column; align-items: center; }
+.unit span { font-size: 1.8rem; font-weight: 600; color: var(--dark-text); }
+.unit label { font-size: 0.75rem; color: #777; text-transform: uppercase; }
 
-/* Custom Popup Frames Universal */
-.hidden-popup { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 999; padding: 2rem; }
-.hidden-popup.active { display: flex !important; }
-.popup-content { background: white; color: black; padding: 1.5rem; border-radius: 12px; text-align: center; max-width: 320px; }
-.popup-content h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--bg-midnight); }
-.popup-content p { font-size: 0.85rem; color: #4a4a4a; margin-bottom: 1rem; line-height: 1.4; }
-.close-hint { font-size: 0.72rem; color: var(--romantic-pink); font-weight: bold; cursor: pointer; text-transform: uppercase; }
+/* ==========================================================================
+   ✉️ ENVELOPE ENVIRONMENT
+   ========================================================================== */
 
-/* Security Authentication Blocks */
-.vault-auth-box input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 0.7rem; color: white; text-align: center; margin: 1rem 0; }
-.error-msg { font-size: 0.75rem; color: #ff4b72; margin-top: 0.5rem; }
-.cinematic-finale h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: var(--romantic-pink); }
-#confetti-canvas { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 9999; }
+.envelope-wrapper { text-align: center; }
+.envelope {
+    width: 280px; height: 180px;
+    background: #ffccd5;
+    position: relative;
+    border: 3px solid var(--dark-text);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 10px 0px rgba(0,0,0,0.05);
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
 
-@keyframes pulse { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+.flap { position: absolute; width: 0; height: 0; border-style: solid; z-index: 6; }
+.top-flap {
+    top: 0; left: -3px;
+    border-width: 90px 143px 0 143px;
+    border-color: #ffb3c1 transparent transparent transparent;
+    transform-origin: top;
+    transition: transform 0.4s ease;
+}
+.side-flap.left-f { bottom: 0; left: -3px; border-width: 93px 0 93px 143px; border-color: transparent transparent transparent #ffa4b6; }
+.side-flap.right-f { bottom: 0; right: -3px; border-width: 93px 143px 93px 0; border-color: transparent #ffa4b6 transparent transparent; }
+
+.letter-card {
+    position: absolute; bottom: 5px; left: 10px;
+    width: 254px; height: 160px;
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    z-index: 5;
+    transition: transform 0.4s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+}
+
+.letter-text { font-size: 0.78rem; line-height: 1.4; color: var(--dark-text); }
+
+.envelope.open .top-flap { transform: rotateX(180deg); z-index: 4; }
+.envelope.open .letter-card { transform: translateY(-80px); z-index: 7; height: 200px; box-shadow: 0 -10px 20px rgba(0,0,0,0.1); }
+
+/* ==========================================================================
+   📜 TIMELINE & PUVUI ENGINE
+   ========================================================================== */
+
+.timeline-wrapper { max-width: 600px; margin: 0 auto; padding-bottom: 4rem; }
+.section-title { font-family: 'Dancing Script', cursive; font-size: 2.5rem; text-align: center; margin-bottom: 2rem; color: var(--pookie-pink); }
+
+.timeline-container { position: relative; padding: 1rem 0; margin-bottom: 2rem; }
+.timeline-container::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: dashed var(--sky-blue); transform: translateX(-50%); }
+
+.timeline-node { width: 100%; margin-bottom: 1.5rem; display: flex; justify-content: center; }
+.node-content { max-width: 280px; text-align: left; transform: rotate(1deg); background: white; }
+.node-date { font-size: 0.8rem; font-weight: 600; color: var(--pookie-pink); display: block; margin-bottom: 0.3rem; }
+.node-chat { font-size: 0.9rem; font-style: italic; color: var(--dark-text); }
+
+.confession-box { background: white; max-width: 100%; margin-bottom: 2rem; border-color: var(--sunny-yellow); box-shadow: 0px 8px 0px var(--sunny-yellow); transform: rotate(-1deg); }
+.confession-box h3 { font-size: 1.1rem; color: var(--pookie-pink); margin-bottom: 0.5rem; }
+.confession-box p { font-size: 0.9rem; line-height: 1.5; }
+
+/* Bubbly Chatbot Interface */
+.gpt-terminal { background: white; max-width: 100%; margin-bottom: 2rem; border-color: var(--sky-blue); box-shadow: 0px 8px 0px var(--sky-blue); transform: rotate(0.5deg); text-align: left; }
+.gpt-terminal h3 { font-size: 1.1rem; color: var(--sky-blue); margin-bottom: 0.3rem; }
+.terminal-hint { font-size: 0.8rem; color: #777; margin-bottom: 1rem; }
+.terminal-form { display: flex; gap: 8px; }
+.terminal-form input { flex: 1; padding: 0.6rem 1rem; border: 2px solid var(--dark-text); border-radius: 30px; outline: none; font-size: 0.9rem; }
+.chat-results-area { margin-top: 1rem; background: var(--bg-playful); border-radius: 16px; padding: 1rem; min-height: 60px; border: 2px dashed var(--pookie-pink); }
+.chat-bubble { padding: 0.8rem; border-radius: 16px; font-size: 0.88rem; line-height: 1.4; background: white; border: 2px solid var(--dark-text); }
+.sender-name { font-weight: 600; color: var(--sky-blue); font-size: 0.75rem; margin-bottom: 2px; }
+
+.text-center-btn { display: block; margin-left: auto; margin-right: auto; }
+
+/* ==========================================================================
+   🎵 SOUNDBOARD ENGINE
+   ========================================================================== */
+
+.soundboard-wrapper { text-align: center; max-width: 450px; width: 100%; }
+.sound-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 1.5rem 0; }
+.sound-card { background: white; padding: 1.5rem 1rem; border-radius: 20px; cursor: pointer; transform: rotate(1deg); transition: transform 0.1s ease; }
+.sound-card:active { transform: scale(0.95); }
+.sound-card h4 { font-size: 0.95rem; color: var(--dark-text); }
+
+.bg-selector-box { background: white; margin-top: 1.5rem; text-align: center; border-color: var(--sunny-yellow); box-shadow: 0px 6px 0px var(--sunny-yellow); }
+.bg-selector-box h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+.bg-selector-box p { font-size: 0.8rem; color: #666; margin-bottom: 0.8rem; }
+
+/* ==========================================================================
+   📸 POLAROID GALLERY
+   ========================================================================== */
+
+.gallery-container { text-align: center; width: 100%; max-width: 500px; }
+.polaroid-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 2rem 0; }
+.polaroid-frame {
+    background: white;
+    padding: 10px 10px 24px 10px;
+    border: 3px solid var(--dark-text);
+    box-shadow: 0px 8px 0px rgba(0,0,0,0.05);
+    border-radius: 4px;
+    cursor: pointer;
+    width: 140px;
+    transition: transform 0.2s ease;
+}
+.polaroid-frame:nth-child(odd) { transform: rotate(-3deg); }
+.polaroid-frame:nth-child(even) { transform: rotate(4deg); }
+.polaroid-frame:hover { transform: scale(1.05) rotate(0deg); z-index: 10; }
+.polaroid-frame img { width: 100%; height: 110px; object-fit: cover; border: 2px solid var(--dark-text); border-radius: 2px; }
+.polaroid-caption { font-family: 'Dancing Script', cursive; font-size: 1.2rem; margin-top: 8px; color: var(--dark-text); }
+
+/* Custom Popup Overlay */
+#memory-popup { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; z-index: 999; padding: 2rem; }
+#memory-popup.active { display: flex !important; }
+.popup-content { background: white; border: 3px solid var(--dark-text); padding: 1.5rem; border-radius: 24px; text-align: center; max-width: 320px; box-shadow: 0 12px 0 var(--dark-text); }
+.popup-content h4 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--pookie-pink); }
+.popup-content p { font-size: 0.9rem; color: var(--dark-text); margin-bottom: 1rem; line-height: 1.4; }
+.close-hint { font-size: 0.8rem; color: var(--sky-blue); font-weight: bold; cursor: pointer; text-transform: uppercase; }
+
+/* ==========================================================================
+   🃏 100 REASONS INTERACTION CARDS
+   ========================================================================== */
+
+.reasons-wrapper { text-align: center; width: 100%; max-width: 450px; }
+.reason-deck-container { margin: 2rem 0; }
+.reason-card { background: white; border-color: var(--pookie-pink); box-shadow: 0px 10px 0px var(--pookie-pink); min-height: 180px; display: flex; flex-direction: column; justify-content: center; transform: rotate(1deg); padding: 1.5rem; }
+.card-counter { font-size: 0.8rem; font-weight: 600; color: var(--sky-blue); text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+#reason-text-output { font-size: 1.05rem; font-style: italic; line-height: 1.5; color: var(--dark-text); }
+
+/* ==========================================================================
+   🎮 MINI GAME VALIDATION CONTAINER
+   ========================================================================== */
+
+.game-wrapper { text-align: center; width: 100%; max-width: 450px; }
+.score-board { font-size: 1rem; font-weight: 600; margin: 0.5rem 0; color: var(--pookie-pink); }
+#game-boundary { width: 100%; height: 260px; background: white; border: 3px dashed var(--sky-blue); border-radius: 24px; position: relative; overflow: hidden; margin-top: 1rem; }
+.target-heart { position: absolute; font-size: 2rem; cursor: pointer; user-select: none; animation: heartWobble 1s infinite alternate ease-in-out; }
+@keyframes heartWobble { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
+
+/* ==========================================================================
+   🎂 VIRTUAL CAKE LAYERS
+   ========================================================================== */
+
+.cake-wrapper { text-align: center; }
+.cake-container { width: 150px; height: 120px; position: relative; margin: 3rem auto 2rem auto; cursor: pointer; }
+.candle-stick { width: 8px; height: 35px; background: #ffbc42; position: absolute; top: -30px; left: 71px; border-radius: 3px; }
+.candle-flame { width: 16px; height: 22px; background: #ff5a5f; position: absolute; top: -52px; left: 67px; border-radius: 50% 50% 20% 20%; animation: flicker 0.1s infinite alternate; transform-origin: bottom; }
+@keyframes flicker { 0% { transform: scaleX(1) scaleY(1); } 100% { transform: scaleX(0.85) scaleY(1.1); } }
+.cake-top-layer { width: 110px; height: 40px; background: var(--sunny-yellow); border: 3px solid var(--dark-text); border-bottom: none; position: absolute; top: 5px; left: 20px; border-radius: 12px 12px 0 0; }
+.cake-bottom-layer { width: 150px; height: 50px; background: var(--pookie-pink); border: 3px solid var(--dark-text); position: absolute; bottom: 25px; left: 0; border-radius: 12px 12px 0 0; }
+
+/* ==========================================================================
+   🗺️ ROADMAP FUTURE TRACKS
+   ========================================================================== */
+
+.promises-container { text-align: center; width: 100%; max-width: 450px; }
+.promises-grid { margin: 2rem 0; }
+.promise-card { background: white; border-color: var(--sky-blue); box-shadow: 0px 6px 0px var(--sky-blue); padding: 1.5rem; transform: rotate(-1deg); }
+.promise-card h4 { font-size: 1.1rem; color: var(--dark-text); }
+
+/* ==========================================================================
+   🔒 UNSEAL MODAL AUTH
+   ========================================================================== */
+
+.vault-auth-box { text-align: center; }
+.vault-auth-box input { width: 100%; background: white; border: 3px solid var(--dark-text); padding: 0.8rem 1rem; border-radius: 30px; outline: none; text-align: center; font-size: 1.1rem; font-weight: 500; margin: 1rem 0; }
+.error-msg { color: #ff5a5f; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
+
+/* ==========================================================================
+   🌌 CINEMATIC SURPRISE LAYER
+   ========================================================================== */
+
+.cinematic-finale { text-align: center; animation: epicEntrance 1s ease-out; }
+@keyframes epicEntrance { 0% { opacity:0; transform: scale(0.8); } 100% { opacity:1; transform: scale(1); } }
+.grand-birthday-wish { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--pookie-pink); margin-bottom: 1rem; text-shadow: 3px 3px 0px rgba(0,0,0,0.05); }
+.final-quote { font-size: 1.4rem; font-weight: 600; color: var(--sky-blue); letter-spacing: 1px; }
+
+#confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 998; }
