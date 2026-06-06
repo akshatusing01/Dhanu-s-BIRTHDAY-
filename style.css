@@ -8,240 +8,117 @@ body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-m
 
 #starfield { position: absolute; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
-/* FIX: Yeh property ensure karegi ki saare screens ek ke upar ek merge na hon */
+/* Structural Fix Overlap Framework Constraints */
 .site-screen {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     z-index: 5;
-    display: none; /* Hide standard layers entirely */
+    display: none;
     justify-content: center;
     align-items: center;
     padding: 2rem;
     background: var(--bg-midnight);
 }
-.site-screen.active {
-    display: flex !important; /* Content will display only when active */
-}
-.site-screen.scrollable {
-    overflow-y: auto;
-    display: none;
-}
-.site-screen.scrollable.active {
-    display: block !important;
-}
+.site-screen.active { display: flex !important; }
+.site-screen.scrollable { overflow-y: auto; display: none; }
+.site-screen.scrollable.active { display: block !important; }
 
 .hidden { display: none !important; }
 .hidden-btn { display: none !important; }
 
-/* Rest CSS Compression */
-.glass-container, .glass-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; text-align: center; max-width: 500px; width: 100%; }
+.glass-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; text-align: center; max-width: 500px; width: 100%; }
 .main-title { font-family: 'Dancing Script', cursive; font-size: 3.5rem; }
 #countdown { display: flex; justify-content: space-around; margin: 2rem 0; }
 .unit span { font-size: 2.5rem; font-weight: bold; display: block; }
-.main-btn { background: var(--romantic-pink); border: none; padding: 1rem 2rem; color: white; font-weight: bold; border-radius: 50px; cursor: pointer; }
+.main-btn { background: var(--romantic-pink); border: none; padding: 1rem 2rem; color: white; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top:1rem;}
 
-/* Envelope Setup */
-.envelope-wrapper { position: relative; }
-.envelope { width: 300px; height: 200px; background: #311845; position: relative; cursor: pointer; }
+/* Envelope Mechanics Layouts */
+.envelope-container { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.envelope { width: 300px; height: 200px; background: #311845; position: relative; cursor: pointer; margin-bottom: 20px; }
 .flap { position: absolute; top:0; width:0; height:0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 100px solid #311845; transform-origin: top; transition: 0.4s; z-index:2; }
 .pocket { position: absolute; bottom:0; width:0; height:0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 100px solid #210d30; z-index:1; }
 .letter { position: absolute; bottom: 5px; left: 15px; width: 270px; height: 180px; background: white; color: black; padding: 1rem; z-index:0; transition: 0.4s; }
 .envelope.open .flap { transform: rotateX(180deg); }
 .envelope.open .letter { transform: translateY(-120px); height: 250px; z-index: 3; }
+.inline-btn { background: var(--romantic-pink); color: white; border: none; padding: 0.5rem 1rem; margin-top: 1rem; border-radius: 4px; cursor: pointer; font-size:0.8rem; }
+.tap-instruction { font-size: 0.8rem; color: #a49fbf; animation: pulse 1.5s infinite alternate; }
 
-/* Timeline UI */
-.timeline-container { max-width: 700px; margin: 0 auto; padding: 2rem 1rem; position: relative; }
-.timeline-line { position: absolute; left: 50%; top: 100px; bottom: 100px; width: 2px; background: var(--romantic-pink); transform: translateX(-50%); }
-.timeline-item { position: relative; width: 50%; margin: 2rem 0; }
-.timeline-item.left { left:0; padding-right: 2rem; }
-.timeline-item.right { left:50%; padding-left: 2rem; }
-.chat-bubble { padding: 0.5rem; border-radius: 10px; margin: 0.5rem 0; color: white; font-size: 0.85rem; }
-.left-bubble { background: #26163a; } .right-bubble { background: #17263c; }
+/* Timeline UI Pipeline */
+.timeline-container { max-width: 700px; margin: 0 auto; padding: 2rem 1rem; position: relative; text-align: center; }
+.timeline-line { position: absolute; left: 50%; top: 180px; bottom: 350px; width: 2px; background: var(--romantic-pink); transform: translateX(-50%); }
+.timeline-item { position: relative; width: 50%; margin: 2rem 0; text-align: left; }
+.timeline-item.left { left:0; padding-right: 1.5rem; }
+.card-adjust { padding: 1.2rem !important; text-align: left !important; }
+.item-date { font-size: 0.7rem; color: var(--gold); font-weight: bold; display: block; margin-bottom: 0.4rem; }
+.chat-bubble { padding: 0.6rem; border-radius: 12px; margin: 0.4rem 0; color: white; font-size: 0.82rem; line-height: 1.4; }
+.left-bubble { background: #26163a; border-left: 3px solid var(--romantic-pink); }
+.right-bubble { background: #17263c; border-right: 3px solid #4edf7a; text-align: right; }
+.sender-name { font-size: 0.65rem; font-weight: bold; color: #a49fbf; margin-bottom: 0.1rem; }
 
-/* Game Boundary */
-#game-boundary { width: 100%; height: 300px; background: rgba(255,255,255,0.02); position: relative; margin: 1rem 0; }
-.target-heart { position: absolute; font-size: 2rem; cursor: pointer; }
+/* Confession Framing */
+.first-impression-card { text-align: left !important; margin: 1.5rem auto 2.5rem auto; border-left: 4px solid var(--gold) !important; }
+.heart-badge { background: rgba(255, 215, 0, 0.15); color: var(--gold); padding: 0.2rem 0.6rem; font-size: 0.65rem; font-weight: bold; border-radius: 4px; }
+.quote-confession { font-size: 0.82rem; line-height: 1.5; margin-top: 0.6rem; color: #ded9f0; font-style: italic; }
 
-/* Cake Setup */
-.cake-wrapper { width: 150px; height: 150px; margin: 2rem auto; position: relative; }
-.candle-body { width: 10px; height: 40px; background: red; position: absolute; left: 47%; bottom: 40px; }
-.candle-flame { width: 12px; height: 20px; background: orange; position: absolute; left: 47%; bottom: 82px; border-radius: 50%; }
-.cake-top-layer { width: 100px; height: 40px; background: purple; position: absolute; bottom: 0; left: 25px; }
+/* PurviGPT Search Interface Layout */
+.ai-search-block { margin: 2.5rem auto; text-align: left !important; background: rgba(10, 5, 30, 0.6) !important; }
+.ai-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+.bot-status { color: #4edf7a; font-size: 0.75rem; font-weight: bold; animation: pulse 1.5s infinite alternate; }
+.search-input-wrapper { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+.search-input-wrapper input { flex: 1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 0.6rem; color: white; font-size: 0.85rem; }
+.search-input-wrapper button { background: var(--romantic-pink); border: none; color: white; padding: 0 1rem; border-radius: 8px; font-weight: bold; font-size: 0.8rem; }
+.search-results-output { margin-top: 1rem; background: rgba(0,0,0,0.3); border-radius: 10px; padding: 0.8rem; max-height: 150px; overflow-y: auto; }
+.no-results-msg { font-size: 0.78rem; color: #ff4b72; text-align: center; font-style: italic; }
 
-.polaroid-grid { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; }
-.polaroid-frame { background: white; padding: 1rem; color: black; }
-.photo-placeholder { font-size: 2rem; }
-.hidden-popup { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; }
-.hidden-popup.active { display: flex; }
-.popup-content { background: white; color: black; padding: 2rem; border-radius: 10px; }
-.cinematic-finale h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; }
-#confetti-canvas { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 999; }
-/* --- First Impression & Confession Styling --- */
-.first-impression-card {
-    text-align: left !important;
-    margin: 1.5rem auto 3rem auto;
-    border-left: 4px solid var(--gold) !important;
-}
-.heart-badge {
-    background: rgba(255, 215, 0, 0.15);
-    color: var(--gold);
-    padding: 0.2rem 0.6rem;
-    font-size: 0.65rem;
-    font-weight: bold;
-    border-radius: 4px;
-    text-transform: uppercase;
-}
-.quote-confession {
-    font-size: 0.82rem;
-    line-height: 1.5;
-    margin-top: 0.6rem;
-    color: #ded9f0;
-    font-style: italic;
-}
-
-/* --- PurviGPT Search Interface Layout --- */
-.ai-search-block {
-    margin: 3rem auto;
-    max-width: 100% !important;
-    background: rgba(10, 5, 30, 0.6) !important;
-    border: 1px solid rgba(255, 117, 143, 0.2) !important;
-    text-align: left !important;
-}
-.ai-header {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.5rem;
-}
-.bot-status {
-    color: #4edf7a;
-    font-size: 0.75rem;
-    font-weight: bold;
-    animation: pulse 1.5s infinite alternate;
-}
-.ai-search-block h3 { font-size: 1.1rem; color: white; }
-.ai-instructions { font-size: 0.75rem; color: #a49fbf; margin-bottom: 1.2rem; line-height: 1.4; }
-
-.search-input-wrapper {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-}
-.search-input-wrapper input {
-    flex: 1;
-    background: rgba(0,0,0,0.4);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    padding: 0.7rem;
-    color: white;
-    font-size: 0.85rem;
-}
-.search-input-wrapper button {
-    background: var(--romantic-pink);
-    border: none;
-    color: white;
-    padding: 0 1rem;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Dynamic Result Box Output Formatting */
-.search-results-output {
-    margin-top: 1.2rem;
-    background: rgba(0,0,0,0.3);
-    border-radius: 10px;
-    padding: 1rem;
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-.no-results-msg { font-size: 0.8rem; color: #ff4b72; text-align: center; font-style: italic; }
-
-/* --- Soundboard Matrix Grid System --- */
+/* Soundboard Structures */
 .soundboard-container { max-width: 400px; width: 100%; }
-.sb-header h2 { font-family: 'Dancing Script', cursive; font-size: 2.3rem; margin-bottom: 0.3rem;}
-.sb-header p { font-size: 0.75rem; color: #a49fbf; margin-bottom: 1.5rem; }
-.sound-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    width: 100%;
-    margin-bottom: 1.5rem;
-}
-.sound-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 1.2rem 0.5rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.sound-card:active { transform: scale(0.95); background: rgba(255,117,143,0.1); border-color: var(--romantic-pink); }
-.tape-icon { font-size: 1.8rem; display: block; margin-bottom: 0.4rem; }
-.sound-card span { font-size: 0.75rem; font-weight: 500; color: #ded9f0; }
+.sound-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+.sound-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.2rem 0.5rem; text-align: center; cursor: pointer; }
+.sound-card:active { background: rgba(255,117,143,0.1); }
+.tape-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
 
-@keyframes pulse {
-    0% { opacity: 0.4; } 100% { opacity: 1; }
-}
-/* --- Upgraded Polaroid Grid Styles --- */
-.polaroid-grid-expanded {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-    width: 100%;
-    max-width: 400px;
-    margin: 1.5rem auto;
-}
-.polaroid-card-new {
-    background: white;
-    padding: 0.5rem;
-    padding-bottom: 1rem;
-    color: black;
-    border-radius: 4px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    transform: rotate(calc(Math.random() * 6deg - 3deg));
-    transition: transform 0.2s ease;
-    cursor: pointer;
-}
-.polaroid-card-new:active { transform: scale(0.95) rotate(0deg); }
-.polaroid-card-new img {
-    width: 100%;
-    height: 110px;
-    object-fit: cover;
-    border-radius: 2px;
-    background: #222;
-}
+/* Polaroid Grid Expanded Configurations */
+.polaroid-grid-expanded { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; width: 100%; max-width: 400px; margin: 1.5rem auto; }
+.polaroid-card-new { background: white; padding: 0.5rem; padding-bottom: 0.8rem; color: black; border-radius: 4px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.4); cursor: pointer; }
+.polaroid-card-new img { width: 100%; height: 100px; object-fit: cover; border-radius: 2px; }
+.polaroid-label { font-size: 0.68rem; font-weight: 600; margin-top: 0.4rem; font-family: 'Dancing Script', cursive; }
 
-/* Music Control Elements */
-.song-selector-box { margin-top: 2rem; padding: 1.2rem !important; }
-.song-selector-box h4 { margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--gold); }
-.music-button-row { display: flex; gap: 0.5rem; justify-content: center; width: 100%; }
-.track-btn {
-    flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-    color: white; padding: 0.6rem 0.3rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; cursor: pointer;
-}
-.track-btn:active { background: var(--romantic-pink); }
-.audio-status-text { font-size: 0.65rem; color: #a49fbf; margin-top: 0.6rem; font-style: italic; }
+/* Audio Selector Panel */
+.song-selector-box { margin: 1.5rem auto; padding: 1rem !important; text-align: center; }
+.music-button-row { display: flex; gap: 0.4rem; justify-content: center; margin-top: 0.6rem; }
+.track-btn { flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: white; padding: 0.5rem 0.2rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; cursor: pointer; }
+.audio-status-text { font-size: 0.65rem; color: #a49fbf; margin-top: 0.5rem; }
 
-/* --- 100 Reasons Interface Layout --- */
-.reasons-container { max-width: 380px !important; text-align: center; position: relative; }
-.reasons-counter-badge {
-    background: rgba(255, 117, 143, 0.15); color: var(--romantic-pink);
-    padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: bold; border-radius: 30px;
-}
-.reason-card-display {
-    background: rgba(0, 0, 0, 0.4); border: 1px dashed rgba(255,255,255,0.15);
-    border-radius: 15px; padding: 2rem 1.5rem; margin: 2rem 0; min-height: 130px;
-    display: flex; align-items: center; justify-content: center;
-}
-#reason-text-output { font-size: 0.92rem; line-height: 1.5; color: #fffbf2; font-style: italic; }
-.inline-btn-pink {
-    background: var(--romantic-pink); border: none; color: white;
-    padding: 0.8rem 1.5rem; font-size: 0.85rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%;
-}
-.inline-btn-pink:active { transform: scale(0.98); }
-.total-stats-hint { font-size: 0.65rem; color: #a49fbf; margin-top: 0.5rem; }
+/* 100 Reasons Layout Deck Elements */
+.reasons-container { max-width: 380px !important; text-align: center; }
+.reasons-counter-badge { background: rgba(255, 117, 143, 0.15); color: var(--romantic-pink); padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: bold; border-radius: 30px; }
+.reason-card-display { background: rgba(0, 0, 0, 0.4); border: 1px dashed rgba(255,255,255,0.15); border-radius: 15px; padding: 2rem 1.2rem; margin: 1.5rem 0; min-height: 120px; display: flex; align-items: center; justify-content: center; }
+#reason-text-output { font-size: 0.88rem; line-height: 1.5; color: #fffbf2; font-style: italic; }
+.inline-btn-pink { background: var(--romantic-pink); border: none; color: white; padding: 0.7rem; font-size: 0.82rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; }
+.total-stats-hint { font-size: 0.62rem; color: #a49fbf; margin-top: 0.4rem; }
+
+/* Mini Games & Cake Output Graphics */
+#game-boundary { width: 100%; height: 260px; background: rgba(255,255,255,0.02); position: relative; margin: 1rem 0; border-radius: 10px; overflow: hidden; }
+.target-heart { position: absolute; font-size: 1.8rem; cursor: pointer; transition: transform 0.1s; user-select: none; }
+.cake-wrapper { width: 150px; height: 150px; margin: 2rem auto; position: relative; cursor: pointer; }
+.candle-body { width: 8px; height: 35px; background: #ff4b72; position: absolute; left: 47%; bottom: 40px; }
+.candle-flame { width: 12px; height: 20px; background: #ffb703; position: absolute; left: 45.5%; bottom: 75px; border-radius: 50%; box-shadow: 0 0 10px #ffb703; }
+.cake-top-layer { width: 100px; height: 40px; background: #b5179e; position: absolute; bottom: 0; left: 25px; border-radius: 5px 5px 0 0; }
+.cake-bottom-layer { width: 130px; height: 45px; background: #7209b7; position: absolute; bottom: -45px; left: 10px; border-radius: 5px 5px 0 0; }
+
+/* Custom Popup Frames Universal */
+.hidden-popup { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 999; padding: 2rem; }
+.hidden-popup.active { display: flex !important; }
+.popup-content { background: white; color: black; padding: 1.5rem; border-radius: 12px; text-align: center; max-width: 320px; }
+.popup-content h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--bg-midnight); }
+.popup-content p { font-size: 0.85rem; color: #4a4a4a; margin-bottom: 1rem; line-height: 1.4; }
+.close-hint { font-size: 0.72rem; color: var(--romantic-pink); font-weight: bold; cursor: pointer; text-transform: uppercase; }
+
+/* Security Authentication Blocks */
+.vault-auth-box input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 0.7rem; color: white; text-align: center; margin: 1rem 0; }
+.error-msg { font-size: 0.75rem; color: #ff4b72; margin-top: 0.5rem; }
+.cinematic-finale h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: var(--romantic-pink); }
+#confetti-canvas { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 9999; }
+
+@keyframes pulse { 0% { opacity: 0.5; } 100% { opacity: 1; } }
