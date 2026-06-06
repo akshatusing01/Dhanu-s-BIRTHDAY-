@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>A Digital Journey for Poorvi ✨</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,13 +13,14 @@
     <audio id="bg-music" src="music.mp3" loop></audio>
 
     <section id="screen-1" class="site-screen active">
-        <div class="glass-container landing-card">
+        <div class="glass-card main-wrapper">
             <header class="hero-header">
                 <p class="tagline">A Digital Time Capsule Dedicated To</p>
                 <h1 class="main-title">Poorvi Mishra <span class="sparkle">✨</span></h1>
                 <p class="sub-tag">Red House Captain 🔴 & Yellow House Vice Captain 🟡</p>
             </header>
-            <div class="countdown-box">
+            
+            <div class="countdown-container">
                 <p class="box-label">The Journey Continues In...</p>
                 <div id="countdown">
                     <div class="unit"><span id="days">00</span><label>Days</label></div>
@@ -28,6 +29,7 @@
                     <div class="unit"><span id="seconds">00</span><label>Secs</label></div>
                 </div>
             </div>
+
             <footer class="action-zone">
                 <button id="open-gift-btn" class="main-btn">🎁 Open Your Gift</button>
                 <p class="audio-hint">🎵 Best experienced with music turned on</p>
@@ -36,7 +38,7 @@
     </section>
 
     <section id="screen-2" class="site-screen hidden">
-        <div class="envelope-wrapper">
+        <div class="envelope-container">
             <div class="envelope" id="interactive-envelope">
                 <div class="flap"></div>
                 <div class="pocket"></div>
@@ -44,9 +46,8 @@
                     <div class="letter-text">
                         <span class="letter-heart">❤️</span>
                         <h2>Hey Poorvi,</h2>
-                        <p>Welcome to your digital time capsule. This is a live museum tracking every milestone, every joke, and every single memory we have shared since our very first interaction.</p>
-                        <p>Scroll down to unlock your timeline...</p>
-                        <button id="proceed-to-timeline" class="inline-btn">Next: Unseal Timeline ➜</button>
+                        <p>Welcome to your digital time capsule. This is a live museum tracking every milestone, every joke, and every single memory we have shared.</p>
+                        <button id="proceed-to-timeline" class="inline-btn">Unseal Timeline ➜</button>
                     </div>
                 </div>
             </div>
@@ -54,14 +55,8 @@
         </div>
     </section>
 
-            </div>
-            <button id="proceed-to-game" class="main-btn">Enter Game 🎮</button>
-        </div>
-    </section>
-
-        <section id="screen-3" class="site-screen hidden scrollable">
+    <section id="screen-3" class="site-screen hidden scrollable">
         <div class="timeline-container">
-            
             <header class="timeline-header">
                 <span class="timeline-icon">📖</span>
                 <h2>Chapter 1: The Inception 🎬</h2>
@@ -84,11 +79,7 @@
                         <span class="item-date">30 July 2025 | 13:48</span>
                         <div class="chat-bubble left-bubble">
                             <p class="sender-name">Akshat</p>
-                            <p class="message-text">"Kal father s baat krne chlteee hain... Islie isko ksi aur date p rkhwate hain..."</p>
-                        </div>
-                        <div class="chat-bubble left-bubble">
-                            <p class="sender-name">Akshat</p>
-                            <p class="message-text">"Tere house me na mai captain tko hi maanta hu... Maaaii to hu na!! 🫱🏻‍🫲🏼"</p>
+                            <p class="message-text">"Kal father s baat krne chlteee hain..."</p>
                         </div>
                     </div>
                 </div>
@@ -97,20 +88,17 @@
             <div class="glass-card ai-search-block">
                 <div class="ai-header">
                     <span class="bot-status">● Live</span>
-                    <h3>PurviGPT: The Chat Vault Explorer 🤖</h3>
+                    <h3>PurviGPT: Chat Explorer 🤖</h3>
                 </div>
-                <p class="ai-instructions">Ask anything or type a keyword (try: <i>bond, booked, captain, house, rabbit, father</i>) to pull up the exact chat memory instantly!</p>
-                
                 <div class="search-input-wrapper">
-                    <input type="text" id="gpt-query" placeholder="Type a memory keyword here..." autocomplete="off">
-                    <button id="gpt-search-btn">Query Engine</button>
+                    <input type="text" id="gpt-query" placeholder="Type: bond, booked, rabbit, captain...">
+                    <button id="gpt-search-btn">Query</button>
                 </div>
-
                 <div id="gpt-results-box" class="search-results-output hidden"></div>
             </div>
 
             <footer class="timeline-footer">
-                <button id="proceed-to-soundboard" class="main-btn">Proceed to Voice Soundboard 🎵</button>
+                <button id="proceed-to-soundboard" class="main-btn">Proceed to Soundboard 🎵</button>
             </footer>
         </div>
     </section>
@@ -119,33 +107,79 @@
         <div class="glass-card soundboard-container">
             <header class="sb-header">
                 <h2>The Archive Soundboard 🎵</h2>
-                <p>Tap any tape reel to playback inside audio notes, laughs, or custom recordings!</p>
+                <p>Tap to playback audio logs or custom voice recordings!</p>
             </header>
-
             <div class="sound-grid">
-                <div class="sound-card" onclick="playVoice('audio1')">
-                    <div class="tape-icon">📼</div>
-                    <span>Cute Message</span>
+                <div class="sound-card" id="sb-card-1">
+                    <div class="tape-icon">盒</div><span>Cute Message</span>
                 </div>
-                <div class="sound-card" onclick="playVoice('audio2')">
-                    <div class="tape-icon">🎤</div>
-                    <span>Funny Voice Note</span>
-                </div>
-                <div class="sound-card" onclick="playVoice('audio3')">
-                    <div class="tape-icon">🎵</div>
-                    <span>The Laugh Track</span>
-                </div>
-                <div class="sound-card" onclick="playVoice('audio4')">
-                    <div class="tape-icon">✨</div>
-                    <span>Birthday Song Vibe</span>
+                <div class="sound-card" id="sb-card-2">
+                    <div class="tape-icon">🎤</div><span>Funny Voice</span>
                 </div>
             </div>
-
             <audio id="audio1" src="voice1.mp3"></audio>
             <audio id="audio2" src="voice2.mp3"></audio>
-            <audio id="audio3" src="voice3.mp3"></audio>
-            <audio id="audio4" src="voice4.mp3"></audio>
-
-            <button id="proceed-to-vault-from-sb" class="main-btn">Unlock Nickname Vault 🔐</button>
+            
+            <button id="proceed-to-vault" class="main-btn">Unlock Nickname Vault 🔐</button>
         </div>
     </section>
+
+    <section id="screen-4" class="site-screen hidden">
+        <div class="vault-container">
+            <header class="vault-header">
+                <h2>The Custom Archive 🐷</h2>
+            </header>
+            <div class="polaroid-grid">
+                <div class="polaroid-card" id="polaroid-pookie">
+                    <div class="polaroid-frame"><div class="photo-placeholder">🎀🐥</div><p class="polaroid-label">Pookie</p></div>
+                </div>
+                <div class="polaroid-card" id="polaroid-piggy">
+                    <div class="polaroid-frame"><div class="photo-placeholder">🐷</div><p class="polaroid-label">Piggy</p></div>
+                </div>
+            </div>
+            <div id="memory-popup" class="hidden-popup">
+                <div class="popup-content"><h4 id="popup-title"></h4><p id="popup-desc"></p><span class="close-hint" id="close-popup-btn">Close</span></div>
+            </div>
+            <button id="proceed-to-game" class="main-btn">Enter Game 🎮</button>
+        </div>
+    </section>
+
+    <section id="screen-5" class="site-screen hidden">
+        <div class="game-container">
+            <h2>Heart Collector ❤️</h2>
+            <div class="score-board">Hearts: <span id="score-counter">0</span> / 5</div>
+            <div id="game-boundary"></div>
+            <button id="proceed-to-cake" class="main-btn hidden-btn">Next: Cake 🎂</button>
+        </div>
+    </section>
+
+    <section id="screen-6" class="site-screen hidden">
+        <div class="cake-container">
+            <h2>Make a Wish... 🎂</h2>
+            <div class="cake-wrapper" id="birthday-cake">
+                <div class="candle-flame" id="flame"></div>
+                <div class="candle-wick"></div>
+                <div class="candle-body"></div>
+                <div class="cake-top-layer"></div>
+                <div class="cake-bottom-layer"></div>
+            </div>
+            <button id="proceed-to-promises" class="main-btn hidden-btn">Next ➜</button>
+        </div>
+    </section>
+
+    <section id="screen-7" class="site-screen hidden">
+        <div class="promises-container">
+            <h2>Future Track 🗺️</h2>
+            <div class="promises-grid">
+                <div class="promise-card glass-card"><h4>The First Real Trip 📍</h4></div>
+            </div>
+            <button id="proceed-to-vault-screen" class="main-btn">Final Security Lock 🔒</button>
+        </div>
+    </section>
+
+    <section id="screen-8" class="site-screen hidden">
+        <div class="vault-auth-box glass-card">
+            <h3>Unseal Final Code 🔒</h3>
+            <input type="text" id="vault-password" placeholder="Type password here...">
+            <button id="unlock-vault-btn" class="inline-btn">Verify</button>
+            <p id="vault-
