@@ -200,61 +200,92 @@ document.addEventListener("DOMContentLoaded", function() {
         draw();
     }
 });
-/* --- Upgraded Polaroid Grid Styles --- */
-.polaroid-grid-expanded {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-    width: 100%;
-    max-width: 400px;
-    margin: 1.5rem auto;
-}
-.polaroid-card-new {
-    background: white;
-    padding: 0.5rem;
-    padding-bottom: 1rem;
-    color: black;
-    border-radius: 4px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    transform: rotate(calc(Math.random() * 6deg - 3deg));
-    transition: transform 0.2s ease;
-    cursor: pointer;
-}
-.polaroid-card-new:active { transform: scale(0.95) rotate(0deg); }
-.polaroid-card-new img {
-    width: 100%;
-    height: 110px;
-    object-fit: cover;
-    border-radius: 2px;
-    background: #222;
+// Paste these new logic sets directly inside your DOMContentLoaded block in script.js
+
+// 1. Updated Screen Routing Links for the new Flow Sequence
+document.getElementById('proceed-to-reasons').onclick = () => {
+    switchScreen('#screen-4', '#screen-reasons');
+};
+
+document.getElementById('proceed-to-game').onclick = () => {
+    switchScreen('#screen-reasons', '#screen-5', spawnHearts); 
+    // Triggers heart game engine exactly on screen entry hook
+};
+
+// 2. Testing Music Stream Configuration Database (High-Speed Direct MP3 streams)
+const testMusicTracks = {
+    tayHai: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    thodiDer: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    perfect: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+};
+
+let activeBackgroundTrack = null;
+
+function playDynamicSong(key) {
+    if(activeBackgroundTrack) {
+        activeBackgroundTrack.pause();
+    }
+    
+    // Intercept default background loop to clear canvas audio track channels
+    const masterBgMusic = document.getElementById('bg-music');
+    if(masterBgMusic) masterBgMusic.pause();
+
+    activeBackgroundTrack = new Audio(testMusicTracks[key]);
+    activeBackgroundTrack.loop = true;
+    activeBackgroundTrack.play().catch(()=>{});
+
+    // Update frontend status labels text stream
+    const labels = { tayHai: "Playing: Tay Hai Vibe (Test Stream)", thodiDer: "Playing: Thodi Der Vibe (Test Stream)", perfect: "Playing: Perfect Vibe (Test Stream)" };
+    document.getElementById('track-status').innerText = labels[key];
 }
 
-/* Music Control Elements */
-.song-selector-box { margin-top: 2rem; padding: 1.2rem !important; }
-.song-selector-box h4 { margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--gold); }
-.music-button-row { display: flex; gap: 0.5rem; justify-content: center; width: 100%; }
-.track-btn {
-    flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-    color: white; padding: 0.6rem 0.3rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; cursor: pointer;
-}
-.track-btn:active { background: var(--romantic-pink); }
-.audio-status-text { font-size: 0.65rem; color: #a49fbf; margin-top: 0.6rem; font-style: italic; }
+// 3. The Massive 100+ Reasons Data Array Stack Engine
+const hundredReasonsList = [
+    "The flawless way your smile instantly fully resets my worst days. 🪻",
+    "How fiercely dedicated you are when managing your house captain responsibilities. 🔴🟡",
+    "Your random late-night text switches that turn into deep logical conversations.",
+    "The way you call out my absolute nonsense without hesitation. 🧠",
+    "Your voice notes that completely change the dynamic of my entire routine.",
+    "The fact that we can talk about completely normal house logistics and somehow still end up chatting daily until 3 AM. 💗",
+    "Your hilarious defense protocols during our great animal totem debates! 🐷",
+    "The simple reality that you make an unbreakable bond feel completely natural and secure. 🩵",
+    "Your weird habits that you think are annoying, but are actually my absolute favorite parts of your personality."
+];
 
-/* --- 100 Reasons Interface Layout --- */
-.reasons-container { max-width: 380px !important; text-align: center; position: relative; }
-.reasons-counter-badge {
-    background: rgba(255, 117, 143, 0.15); color: var(--romantic-pink);
-    padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: bold; border-radius: 30px;
+let lastReasonIndex = 0;
+const nextReasonBtn = document.getElementById('next-reason-btn');
+
+if(nextReasonBtn) {
+    nextReasonBtn.onclick = () => {
+        // Safe random allocation mechanics preventing double repetition matching
+        let randIndex = Math.floor(Math.random() * hundredReasonsList.length);
+        while(randIndex === lastReasonIndex) {
+            randIndex = Math.floor(Math.random() * hundredReasonsList.length);
+        }
+        lastReasonIndex = randIndex;
+
+        // Apply GSAP structural transition effects during card value mutations
+        gsap.to("#reason-text-output", { opacity: 0, scale: 0.9, duration: 0.15, onComplete: () => {
+            document.getElementById('reason-text-output').innerText = `"${hundredReasonsList[randIndex]}"`;
+            document.getElementById('card-index-num').innerText = randIndex + 1;
+            gsap.to("#reason-text-output", { opacity: 1, scale: 1, duration: 0.2 });
+        }});
+    };
 }
-.reason-card-display {
-    background: rgba(0, 0, 0, 0.4); border: 1px dashed rgba(255,255,255,0.15);
-    border-radius: 15px; padding: 2rem 1.5rem; margin: 2rem 0; min-height: 130px;
-    display: flex; align-items: center; justify-content: center;
+
+// Memory Database expansion keys
+const expandedMemories = {
+    pookie: { title: "Pookie Deployment 🎀", desc: "Official code registration logged at midnight when routine logs got overwhelming." },
+    piggy: { title: "The Piggy Debate 🐷", desc: "Long-standing historical animal totem argument logs tracking back to February." },
+    "first-day": { title: "The School Anchor 🔴🟡", desc: "How a standard work schedule evolved straight into a permanent unsealed conversation link." }
+};
+
+// Global reveal wrapper upgrade
+function revealMemory(key) {
+    document.getElementById('popup-title').innerText = expandedMemories[key].title;
+    document.getElementById('popup-desc').innerText = expandedMemories[key].desc;
+    document.getElementById('memory-popup').classList.add('active');
 }
-#reason-text-output { font-size: 0.92rem; line-height: 1.5; color: #fffbf2; font-style: italic; }
-.inline-btn-pink {
-    background: var(--romantic-pink); border: none; color: white;
-    padding: 0.8rem 1.5rem; font-size: 0.85rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%;
+function closeMemory() {
+    document.getElementById('memory-popup').classList.remove('active');
 }
-.inline-btn-pink:active { transform: scale(0.98); }
-.total-stats-hint { font-size: 0.65rem; color: #a49fbf; margin-top: 0.5rem; }
