@@ -134,3 +134,78 @@ function initConfetti() {
     }
     draw();
 }
+// Replace your old proceed-to-vault click routing logic near the middle with this:
+document.getElementById('proceed-to-vault').onclick = () => {
+    switchScreen('#screen-3', '#screen-soundboard');
+};
+
+document.getElementById('proceed-to-vault-from-sb').onclick = () => {
+    switchScreen('#screen-soundboard', '#screen-4');
+};
+
+// --- 🤖 HIGH-TECH PURVIGPT SEMANTIC CHAT SEARCH ENGINE ---
+// Explicit clean tracking mapping database extracted completely from your chat logs
+const chatLogsDatabase = [
+    { text: "Kal father s baat krne chlteee hain... Islie isko ksi aur date p rkhwate hain...", date: "30 Jul 2025", sender: "Akshat" },
+    { text: "Tere house me na mai captain tko hi maanta hu... Maaaii to hu na!! 🫱🏻‍🫲🏼", date: "30 Jul 2025", sender: "Akshat" },
+    { text: "Aree me sab kar sakti hu but I need self respect atleast... Busy itne hu ke depression ka time hee nahi hai", date: "18 Aug 2025", sender: "Poorvi" },
+    { text: "To be honest Poori! Tuu naa sbse zyda deserving house Captain hai... sachme Beta", date: "18 Aug 2025", sender: "Akshat" },
+    { text: "We guys had unbreakable bond 🩵", date: "25 Dec 2025", sender: "Akshat" },
+    { text: "Mko Itna maan lete hain 💔🎀💫pr abb mai 😭sif tera Na 🙏🏻🙏🏻booked forever", date: "26 Jan 2026", sender: "Akshat" },
+    { text: "Yayyyyyyyyyyy..... Dinasourrrrrrrrrr Rex 🦖👻👻", date: "26 Jan 2026", sender: "Poorvi" },
+    { text: "Nahhh... Rabbit hu mai 👻... Piggo layout dropped permanently!", date: "25 Feb 2026", sender: "Poorvi" }
+];
+
+const searchBtn = document.getElementById('gpt-search-btn');
+const queryInput = document.getElementById('gpt-query');
+const resultsBox = document.getElementById('gpt-results-box');
+
+searchBtn.addEventListener('click', runChatSearch);
+queryInput.addEventListener('keypress', function(e) { if(e.key === 'Enter') runChatSearch(); });
+
+function runChatSearch() {
+    const rawQuery = queryInput.value.trim().toLowerCase();
+    if(!rawQuery) return;
+
+    // Filter array algorithm parsing string match rules
+    const matches = chatLogsDatabase.filter(log => log.text.toLowerCase().includes(rawQuery));
+    
+    resultsBox.innerHTML = ""; // Empty output viewport
+    resultsBox.classList.remove('hidden');
+
+    if(matches.length === 0) {
+        resultsBox.innerHTML = `<p class="no-results-msg">"PurviGPT couldn't find any direct match for '${rawQuery}'. Try keywords like bond, booked, or house!"</p>`;
+        return;
+    }
+
+    // Render formatted output bubbles into target element wrapper
+    matches.forEach(log => {
+        const bubbleWrap = document.createElement('div');
+        const isAkshat = log.sender === "Akshat";
+        bubbleWrap.className = `chat-bubble ${isAkshat ? 'left-bubble' : 'right-bubble'}`;
+        bubbleWrap.style.maxWidth = "100%";
+        
+        bubbleWrap.innerHTML = `
+            <p class="sender-name" style="font-size:0.55rem;">${log.sender} | ${log.date}</p>
+            <p class="message-text">${log.text}</p>
+        `;
+        resultsBox.appendChild(bubbleWrap);
+    });
+}
+
+// --- 🎵 MULTI-TRACK SOUNDBOARD MIXER FUNCTION ---
+let currentPlayingAudio = null;
+
+function playVoice(id) {
+    // Stop currently running tracks to prevent audio stacking mesh
+    if(currentPlayingAudio) {
+        currentPlayingAudio.pause();
+        currentPlayingAudio.currentTime = 0;
+    }
+    
+    const targetAudio = document.getElementById(id);
+    if(targetAudio) {
+        targetAudio.play().catch(e => console.log("Audio file initialization missing: ", e));
+        currentPlayingAudio = targetAudio;
+    }
+}
