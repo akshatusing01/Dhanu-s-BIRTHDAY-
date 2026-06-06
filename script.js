@@ -1,7 +1,6 @@
-// Ensure standard execution context
 document.addEventListener("DOMContentLoaded", function() {
 
-    // 1. Starfield Background Logic
+    // 1. Starfield Particle Background Simulation Engine
     const canvas = document.getElementById('starfield');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -15,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     drawStars();
 
-    // 2. Countdown Engine Fix (Targeting August 13)
+    // 2. Countdown Engine Setup Target (August 13, 2026)
     const target = new Date('August 13, 2026 00:00:00').getTime();
     function runCountdown() {
         const now = new Date().getTime();
@@ -33,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     setInterval(runCountdown, 1000); runCountdown();
 
-    // 3. Robust View Transition Routing Engine
+    // 3. Central Routing Interface Layout Handler
     function switchScreen(currentSelector, nextSelector, callback) {
         gsap.to(currentSelector, { opacity: 0, duration: 0.2, onComplete: () => {
             const curr = document.querySelector(currentSelector);
@@ -48,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }});
     }
 
-    // 4. Stable Button Event Binding Operations
+    // 4. Safe Button Explicit Event Interceptors
     document.getElementById('open-gift-btn').onclick = () => {
         document.getElementById('bg-music').play().catch(()=>{});
         switchScreen('#screen-1', '#screen-2');
@@ -71,8 +70,12 @@ document.addEventListener("DOMContentLoaded", function() {
         switchScreen('#screen-soundboard', '#screen-4');
     };
 
+    document.getElementById('proceed-to-reasons').onclick = () => {
+        switchScreen('#screen-4', '#screen-reasons');
+    };
+
     document.getElementById('proceed-to-game').onclick = () => {
-        switchScreen('#screen-4', '#screen-5', spawnHearts);
+        switchScreen('#screen-reasons', '#screen-5', spawnHearts);
     };
 
     document.getElementById('proceed-to-cake').onclick = () => {
@@ -87,14 +90,14 @@ document.addEventListener("DOMContentLoaded", function() {
         switchScreen('#screen-7', '#screen-8');
     };
 
-    // 5. PurviGPT Database Engine Mapping Array
+    // 5. PurviGPT Dynamic Database Core Array
     const chatLogsDatabase = [
         { text: "Kal father s baat krne chlteee hain... Islie isko ksi aur date p rkhwate hain...", date: "30 Jul 2025", sender: "Akshat" },
         { text: "Tere house me na mai captain tko hi maanta hu... Maaaii to hu na!! 🫱🏻‍🫲🏼", date: "30 Jul 2025", sender: "Akshat" },
         { text: "Busy itne hu ke depression ka time hee nahi hai", date: "18 Aug 2025", sender: "Poorvi" },
         { text: "To be honest Poori! Tuu naa sbse zyda deserving house Captain hai...", date: "18 Aug 2025", sender: "Akshat" },
         { text: "We guys had unbreakable bond 🩵", date: "25 Dec 2025", sender: "Akshat" },
-        { text: "sif tera Na 🙏🏻... booked forever", date: "26 Jan 2026", sender: "Akshat" },
+        { text: "sif tera Na 🙏... booked forever", date: "26 Jan 2026", sender: "Akshat" },
         { text: "Rabbit hu mai 👻... Piggy layout dropped permanently!", date: "25 Feb 2026", sender: "Poorvi" }
     ];
 
@@ -122,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
     }
 
-    // 6. Soundboard Event Listeners
+    // 6. Soundboard Mechanics Configuration
     let activeVoice = null;
     function mixVoice(id) {
         if(activeVoice) { activeVoice.pause(); activeVoice.currentTime = 0; }
@@ -132,26 +135,74 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('sb-card-1').onclick = () => mixVoice('audio1');
     document.getElementById('sb-card-2').onclick = () => mixVoice('audio2');
 
-    // 7. Nickname Polaroid Popup Bindings
-    const memoryData = {
-        pookie: { title: "Pookie Deployment 🎀", desc: "Official code registration logged at midnight." },
-        piggy: { title: "The Piggy Debate 🐷", desc: "Long-standing historical animal totem argument logs." }
+    // 7. Testing Music Streams Configuration Module
+    const testMusicTracks = {
+        tayHai: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        thodiDer: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        perfect: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
     };
-    document.getElementById('polaroid-pookie').onclick = () => {
-        document.getElementById('popup-title').innerText = memoryData.pookie.title;
-        document.getElementById('popup-desc').innerText = memoryData.pookie.desc;
+    let activeBackgroundTrack = null;
+    function playDynamicSong(key) {
+        if(activeBackgroundTrack) activeBackgroundTrack.pause();
+        const masterBgMusic = document.getElementById('bg-music');
+        if(masterBgMusic) masterBgMusic.pause();
+
+        activeBackgroundTrack = new Audio(testMusicTracks[key]);
+        activeBackgroundTrack.loop = true;
+        activeBackgroundTrack.play().catch(()=>{});
+        
+        const labels = { tayHai: "Playing: Tay Hai Vibe (Test)", thodiDer: "Playing: Thodi Der Vibe (Test)", perfect: "Playing: Perfect Vibe (Test)" };
+        document.getElementById('track-status').innerText = labels[key];
+    }
+    document.getElementById('track-btn-tay').onclick = () => playDynamicSong('tayHai');
+    document.getElementById('track-btn-thodi').onclick = () => playDynamicSong('thodiDer');
+    document.getElementById('track-btn-perfect').onclick = () => playDynamicSong('perfect');
+
+    // 8. Expanded Photo Popup Engine Matrix
+    const expandedMemories = {
+        pookie: { title: "Pookie Deployment 🎀", desc: "Official code registration logged at midnight when routine logs got overwhelming." },
+        piggy: { title: "The Piggy Debate 🐷", desc: "Long-standing historical animal totem argument logs tracking back to February." },
+        "first-day": { title: "The School Anchor 🔴🟡", desc: "How a standard work schedule evolved straight into a permanent unsealed conversation link." }
+    };
+    function revealMemory(key) {
+        document.getElementById('popup-title').innerText = expandedMemories[key].title;
+        document.getElementById('popup-desc').innerText = expandedMemories[key].desc;
         document.getElementById('memory-popup').classList.add('active');
-    };
-    document.getElementById('polaroid-piggy').onclick = () => {
-        document.getElementById('popup-title').innerText = memoryData.piggy.title;
-        document.getElementById('popup-desc').innerText = memoryData.piggy.desc;
-        document.getElementById('memory-popup').classList.add('active');
-    };
+    }
+    document.getElementById('photo-pookie').onclick = () => revealMemory('pookie');
+    document.getElementById('photo-piggy').onclick = () => revealMemory('piggy');
+    document.getElementById('photo-first-day').onclick = () => revealMemory('first-day');
     document.getElementById('close-popup-btn').onclick = () => {
         document.getElementById('memory-popup').classList.remove('active');
     };
 
-    // 8. Minigame Mechanics
+    // 9. 100 Reasons Infinite Generator Loop Setup
+    const hundredReasonsList = [
+        "The flawless way your smile instantly fully resets my worst days. 🪻",
+        "How fiercely dedicated you are when managing your house captain responsibilities. 🔴🟡",
+        "Your random late-night text switches that turn into deep logical conversations.",
+        "The way you call out my absolute nonsense without hesitation. 🧠",
+        "Your voice notes that completely change the dynamic of my entire routine.",
+        "The fact that we can talk about completely normal house logistics and somehow still end up chatting daily until 3 AM. 💗",
+        "Your hilarious defense protocols during our great animal totem debates! 🐷",
+        "The simple reality that you make an unbreakable bond feel completely natural and secure. 🩵",
+        "Your weird habits that you think are annoying, but are actually my absolute favorite parts of your personality."
+    ];
+    let lastReasonIndex = 0;
+    document.getElementById('next-reason-btn').onclick = () => {
+        let randIndex = Math.floor(Math.random() * hundredReasonsList.length);
+        while(randIndex === lastReasonIndex) {
+            randIndex = Math.floor(Math.random() * hundredReasonsList.length);
+        }
+        lastReasonIndex = randIndex;
+        gsap.to("#reason-text-output", { opacity: 0, scale: 0.9, duration: 0.15, onComplete: () => {
+            document.getElementById('reason-text-output').innerText = `"${hundredReasonsList[randIndex]}"`;
+            document.getElementById('card-index-num').innerText = randIndex + 1;
+            gsap.to("#reason-text-output", { opacity: 1, scale: 1, duration: 0.2 });
+        }});
+    };
+
+    // 10. Heart Collector Engine
     let gameScore = 0;
     function spawnHearts() {
         const boundary = document.getElementById('game-boundary');
@@ -170,14 +221,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // 9. Cake Blowing Interaction System
+    // 11. Birthday Cake Click Mechanics
     document.getElementById('birthday-cake').onclick = function() {
         document.getElementById('flame').style.display = 'none';
         initConfetti();
         document.getElementById('proceed-to-promises').classList.remove('hidden-btn');
     };
 
-    // 10. Vault Authentication Code Validations
+    // 12. Security Verification Core Access Pass
     document.getElementById('unlock-vault-btn').onclick = () => {
         const p = document.getElementById('vault-password').value.trim().toLowerCase();
         if(p === "piggy") {
@@ -187,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
-    // 11. Confetti Effects Canvas Render
+    // 13. High-Speed Particle Canvas Confetti System
     function initConfetti() {
         const c = document.getElementById('confetti-canvas'); const cc = c.getContext('2d');
         c.width = window.innerWidth; c.height = window.innerHeight;
@@ -200,92 +251,3 @@ document.addEventListener("DOMContentLoaded", function() {
         draw();
     }
 });
-// Paste these new logic sets directly inside your DOMContentLoaded block in script.js
-
-// 1. Updated Screen Routing Links for the new Flow Sequence
-document.getElementById('proceed-to-reasons').onclick = () => {
-    switchScreen('#screen-4', '#screen-reasons');
-};
-
-document.getElementById('proceed-to-game').onclick = () => {
-    switchScreen('#screen-reasons', '#screen-5', spawnHearts); 
-    // Triggers heart game engine exactly on screen entry hook
-};
-
-// 2. Testing Music Stream Configuration Database (High-Speed Direct MP3 streams)
-const testMusicTracks = {
-    tayHai: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    thodiDer: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-    perfect: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
-};
-
-let activeBackgroundTrack = null;
-
-function playDynamicSong(key) {
-    if(activeBackgroundTrack) {
-        activeBackgroundTrack.pause();
-    }
-    
-    // Intercept default background loop to clear canvas audio track channels
-    const masterBgMusic = document.getElementById('bg-music');
-    if(masterBgMusic) masterBgMusic.pause();
-
-    activeBackgroundTrack = new Audio(testMusicTracks[key]);
-    activeBackgroundTrack.loop = true;
-    activeBackgroundTrack.play().catch(()=>{});
-
-    // Update frontend status labels text stream
-    const labels = { tayHai: "Playing: Tay Hai Vibe (Test Stream)", thodiDer: "Playing: Thodi Der Vibe (Test Stream)", perfect: "Playing: Perfect Vibe (Test Stream)" };
-    document.getElementById('track-status').innerText = labels[key];
-}
-
-// 3. The Massive 100+ Reasons Data Array Stack Engine
-const hundredReasonsList = [
-    "The flawless way your smile instantly fully resets my worst days. 🪻",
-    "How fiercely dedicated you are when managing your house captain responsibilities. 🔴🟡",
-    "Your random late-night text switches that turn into deep logical conversations.",
-    "The way you call out my absolute nonsense without hesitation. 🧠",
-    "Your voice notes that completely change the dynamic of my entire routine.",
-    "The fact that we can talk about completely normal house logistics and somehow still end up chatting daily until 3 AM. 💗",
-    "Your hilarious defense protocols during our great animal totem debates! 🐷",
-    "The simple reality that you make an unbreakable bond feel completely natural and secure. 🩵",
-    "Your weird habits that you think are annoying, but are actually my absolute favorite parts of your personality."
-];
-
-let lastReasonIndex = 0;
-const nextReasonBtn = document.getElementById('next-reason-btn');
-
-if(nextReasonBtn) {
-    nextReasonBtn.onclick = () => {
-        // Safe random allocation mechanics preventing double repetition matching
-        let randIndex = Math.floor(Math.random() * hundredReasonsList.length);
-        while(randIndex === lastReasonIndex) {
-            randIndex = Math.floor(Math.random() * hundredReasonsList.length);
-        }
-        lastReasonIndex = randIndex;
-
-        // Apply GSAP structural transition effects during card value mutations
-        gsap.to("#reason-text-output", { opacity: 0, scale: 0.9, duration: 0.15, onComplete: () => {
-            document.getElementById('reason-text-output').innerText = `"${hundredReasonsList[randIndex]}"`;
-            document.getElementById('card-index-num').innerText = randIndex + 1;
-            gsap.to("#reason-text-output", { opacity: 1, scale: 1, duration: 0.2 });
-        }});
-    };
-}
-
-// Memory Database expansion keys
-const expandedMemories = {
-    pookie: { title: "Pookie Deployment 🎀", desc: "Official code registration logged at midnight when routine logs got overwhelming." },
-    piggy: { title: "The Piggy Debate 🐷", desc: "Long-standing historical animal totem argument logs tracking back to February." },
-    "first-day": { title: "The School Anchor 🔴🟡", desc: "How a standard work schedule evolved straight into a permanent unsealed conversation link." }
-};
-
-// Global reveal wrapper upgrade
-function revealMemory(key) {
-    document.getElementById('popup-title').innerText = expandedMemories[key].title;
-    document.getElementById('popup-desc').innerText = expandedMemories[key].desc;
-    document.getElementById('memory-popup').classList.add('active');
-}
-function closeMemory() {
-    document.getElementById('memory-popup').classList.remove('active');
-}
