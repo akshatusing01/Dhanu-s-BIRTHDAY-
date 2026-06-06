@@ -8,7 +8,7 @@ body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-m
 
 #starfield { position: absolute; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
-/* Structural Fix Overlap Framework Constraints */
+/* Fixed Screen Routing Layout Rules */
 .site-screen {
     position: fixed;
     top: 0; left: 0;
@@ -20,43 +20,57 @@ body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-m
     padding: 2rem;
     background: var(--bg-midnight);
 }
-.site-screen.active { display: flex !important; }
-.site-screen.scrollable { overflow-y: auto; display: none; }
+.site-screen.active { display: flex !important; opacity: 1; }
+
+/* Fixed Scrollable Clashes */
+.site-screen.scrollable { 
+    overflow-y: auto !important; 
+    display: none; 
+    align-items: flex-start !important; 
+}
 .site-screen.scrollable.active { display: block !important; }
 
 .hidden { display: none !important; }
 .hidden-btn { display: none !important; }
 
-.glass-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; text-align: center; max-width: 500px; width: 100%; }
+.glass-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; text-align: center; max-width: 500px; width: 100%; margin: 0 auto; }
 .main-title { font-family: 'Dancing Script', cursive; font-size: 3.5rem; }
 #countdown { display: flex; justify-content: space-around; margin: 2rem 0; }
 .unit span { font-size: 2.5rem; font-weight: bold; display: block; }
-.main-btn { background: var(--romantic-pink); border: none; padding: 1rem 2rem; color: white; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top:1rem;}
+.main-btn { background: var(--romantic-pink); border: none; padding: 1rem 2rem; color: white; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top:1rem; position: relative; z-index: 10; }
 
-/* Envelope Mechanics Layouts */
+/* Envelope Style Engine */
 .envelope-container { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
-.envelope { width: 300px; height: 200px; background: #311845; position: relative; cursor: pointer; margin-bottom: 20px; }
-.flap { position: absolute; top:0; width:0; height:0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 100px solid #311845; transform-origin: top; transition: 0.4s; z-index:2; }
+.envelope { width: 300px; height: 200px; background: #311845; position: relative; cursor: pointer; margin-bottom: 20px; z-index: 10; }
+.flap { position: absolute; top:0; width:0; height:0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 100px solid #311845; transform-origin: top; transition: transform 0.4s ease; z-index:2; }
 .pocket { position: absolute; bottom:0; width:0; height:0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 100px solid #210d30; z-index:1; }
-.letter { position: absolute; bottom: 5px; left: 15px; width: 270px; height: 180px; background: white; color: black; padding: 1rem; z-index:0; transition: 0.4s; }
-.envelope.open .flap { transform: rotateX(180deg); }
-.envelope.open .letter { transform: translateY(-120px); height: 250px; z-index: 3; }
-.inline-btn { background: var(--romantic-pink); color: white; border: none; padding: 0.5rem 1rem; margin-top: 1rem; border-radius: 4px; cursor: pointer; font-size:0.8rem; }
+.letter { position: absolute; bottom: 5px; left: 15px; width: 270px; height: 180px; background: white; color: black; padding: 1rem; z-index:0; transition: transform 0.4s ease, height 0.4s ease; }
+.envelope.open .flap { transform: rotateX(180deg); z-index: 0; }
+.envelope.open .letter { transform: translateY(-120px); height: 260px; z-index: 3; }
+.inline-btn { background: var(--romantic-pink); color: white; border: none; padding: 0.5rem 1rem; margin-top: 1rem; border-radius: 4px; cursor: pointer; font-size:0.8rem; display: inline-block; position: relative; z-index: 20; }
 .tap-instruction { font-size: 0.8rem; color: #a49fbf; animation: pulse 1.5s infinite alternate; }
 
-/* Timeline UI Pipeline */
+/* Timeline Visual Overhaul */
 .timeline-container { max-width: 700px; margin: 0 auto; padding: 2rem 1rem; position: relative; text-align: center; }
-.timeline-line { position: absolute; left: 50%; top: 180px; bottom: 350px; width: 2px; background: var(--romantic-pink); transform: translateX(-50%); }
-.timeline-item { position: relative; width: 50%; margin: 2rem 0; text-align: left; }
-.timeline-item.left { left:0; padding-right: 1.5rem; }
-.card-adjust { padding: 1.2rem !important; text-align: left !important; }
-.item-date { font-size: 0.7rem; color: var(--gold); font-weight: bold; display: block; margin-bottom: 0.4rem; }
-.chat-bubble { padding: 0.6rem; border-radius: 12px; margin: 0.4rem 0; color: white; font-size: 0.82rem; line-height: 1.4; }
-.left-bubble { background: #26163a; border-left: 3px solid var(--romantic-pink); }
-.right-bubble { background: #17263c; border-right: 3px solid #4edf7a; text-align: right; }
-.sender-name { font-size: 0.65rem; font-weight: bold; color: #a49fbf; margin-bottom: 0.1rem; }
+.timeline-line { position: absolute; left: 50%; top: 180px; bottom: 150px; width: 2px; background: var(--romantic-pink); transform: translateX(-50%); z-index: 1; }
+.timeline-box { position: relative; width: 100%; margin: 2rem auto; display: flex; flex-direction: column; gap: 1.5rem; z-index: 2; }
+.timeline-item { position: relative; width: 85%; margin: 0 auto; text-align: left; }
+.timeline-item.left { margin-left: 0; }
+.timeline-item.right-item { margin-right: 0; text-align: right; }
 
-/* Confession Framing */
+.card-adjust { padding: 1.2rem !important; text-align: left !important; background: rgba(255,255,255,0.07); }
+.highlight-bubble-border { border-right: 4px solid #4edf7a !important; }
+.special-akshat-box { border-left: 4px solid var(--romantic-pink) !important; }
+
+.item-date { font-size: 0.7rem; color: var(--gold); font-weight: bold; display: block; margin-bottom: 0.4rem; }
+.chat-bubble { padding: 0.6rem; border-radius: 12px; margin: 0.4rem 0; color: white; font-size: 0.82rem; line-height: 1.4; display: inline-block; max-width: 100%; }
+.left-bubble { background: #26163a; text-align: left; }
+.dynamic-right-bubble { background: #17263c; text-align: left; display: block; }
+
+.sender-name { font-size: 0.65rem; font-weight: bold; color: var(--romantic-pink); margin-bottom: 0.1rem; text-transform: uppercase; }
+.sender-name-right { font-size: 0.65rem; font-weight: bold; color: #4edf7a; margin-bottom: 0.1rem; text-transform: uppercase; }
+
+.dynamic-chapter-spacing { margin-top: 3.5rem !important; margin-bottom: 1.5rem !important; }
 .first-impression-card { text-align: left !important; margin: 1.5rem auto 2.5rem auto; border-left: 4px solid var(--gold) !important; }
 .heart-badge { background: rgba(255, 215, 0, 0.15); color: var(--gold); padding: 0.2rem 0.6rem; font-size: 0.65rem; font-weight: bold; border-radius: 4px; }
 .quote-confession { font-size: 0.82rem; line-height: 1.5; margin-top: 0.6rem; color: #ded9f0; font-style: italic; }
@@ -67,7 +81,7 @@ body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-m
 .bot-status { color: #4edf7a; font-size: 0.75rem; font-weight: bold; animation: pulse 1.5s infinite alternate; }
 .search-input-wrapper { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
 .search-input-wrapper input { flex: 1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 0.6rem; color: white; font-size: 0.85rem; }
-.search-input-wrapper button { background: var(--romantic-pink); border: none; color: white; padding: 0 1rem; border-radius: 8px; font-weight: bold; font-size: 0.8rem; }
+.search-input-wrapper button { background: var(--romantic-pink); border: none; color: white; padding: 0 1rem; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer; }
 .search-results-output { margin-top: 1rem; background: rgba(0,0,0,0.3); border-radius: 10px; padding: 0.8rem; max-height: 150px; overflow-y: auto; }
 .no-results-msg { font-size: 0.78rem; color: #ff4b72; text-align: center; font-style: italic; }
 
