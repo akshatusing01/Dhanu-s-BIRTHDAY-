@@ -200,3 +200,61 @@ document.addEventListener("DOMContentLoaded", function() {
         draw();
     }
 });
+/* --- Upgraded Polaroid Grid Styles --- */
+.polaroid-grid-expanded {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 1.5rem auto;
+}
+.polaroid-card-new {
+    background: white;
+    padding: 0.5rem;
+    padding-bottom: 1rem;
+    color: black;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    transform: rotate(calc(Math.random() * 6deg - 3deg));
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+.polaroid-card-new:active { transform: scale(0.95) rotate(0deg); }
+.polaroid-card-new img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 2px;
+    background: #222;
+}
+
+/* Music Control Elements */
+.song-selector-box { margin-top: 2rem; padding: 1.2rem !important; }
+.song-selector-box h4 { margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--gold); }
+.music-button-row { display: flex; gap: 0.5rem; justify-content: center; width: 100%; }
+.track-btn {
+    flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: white; padding: 0.6rem 0.3rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; cursor: pointer;
+}
+.track-btn:active { background: var(--romantic-pink); }
+.audio-status-text { font-size: 0.65rem; color: #a49fbf; margin-top: 0.6rem; font-style: italic; }
+
+/* --- 100 Reasons Interface Layout --- */
+.reasons-container { max-width: 380px !important; text-align: center; position: relative; }
+.reasons-counter-badge {
+    background: rgba(255, 117, 143, 0.15); color: var(--romantic-pink);
+    padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: bold; border-radius: 30px;
+}
+.reason-card-display {
+    background: rgba(0, 0, 0, 0.4); border: 1px dashed rgba(255,255,255,0.15);
+    border-radius: 15px; padding: 2rem 1.5rem; margin: 2rem 0; min-height: 130px;
+    display: flex; align-items: center; justify-content: center;
+}
+#reason-text-output { font-size: 0.92rem; line-height: 1.5; color: #fffbf2; font-style: italic; }
+.inline-btn-pink {
+    background: var(--romantic-pink); border: none; color: white;
+    padding: 0.8rem 1.5rem; font-size: 0.85rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%;
+}
+.inline-btn-pink:active { transform: scale(0.98); }
+.total-stats-hint { font-size: 0.65rem; color: #a49fbf; margin-top: 0.5rem; }
